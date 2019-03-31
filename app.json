@@ -4,6 +4,7 @@
     "slug": "conosco",
     "privacy": "public",
     "sdkVersion": "32.0.0",
+    "facebookScheme": "fb2279625532289242",
     "platforms": [
       "ios",
       "android"
