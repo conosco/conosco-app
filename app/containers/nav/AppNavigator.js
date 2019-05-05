@@ -5,7 +5,12 @@ import Home from '../screens/Home';
 import Register from '../screens/Register';
 
 const routes = {
-  Home,
+  Home:{
+    screen: Home,
+    navigationOptions: {
+      header: null
+    }
+  },
   Register,
 };
 

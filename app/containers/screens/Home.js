@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, Image, Dimensions } from 'react-native';
 
 import { connect } from 'react-redux';
 
@@ -8,12 +8,16 @@ import { logIn } from '../../actions/user';
 import Button from '../../components/common/button';
 
 const fb = require('../../../assets/fb.png');
+var screenWidth = Dimensions.get('window').width;
 
 class Home extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={{ fontSize: 32, color: '#2a2a2a', fontWeight: '600' }}>Conosco</Text>
+        <Image
+          style={styles.logo}
+          source={require('../../../assets/conosco_logo(sem_fundo).png')}
+        />
         <Button
           text={'Entrar com Facebook'}
           color={'#4267B2'}
@@ -23,7 +27,7 @@ class Home extends React.Component {
         />
         <Button
           text={'Entrar com e-mail'}
-          color={'#F29F99'}
+          color={'#88A379'}
           textColor={'#fff'}
           icon={null}
           press={() => {}}
@@ -38,7 +42,7 @@ class Home extends React.Component {
           color={'#fff'}
           border
           borderColor={'#EFEFED'}
-          textColor={'#F29F99'}
+          textColor={'#79A39D'}
           icon={null}
           press={() => this.props.navigation.navigate('Register')}
         />
@@ -53,6 +57,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
+    backgroundColor: 'rgb(79, 133, 134)'
   },
 
   button: {
@@ -66,6 +71,12 @@ const styles = StyleSheet.create({
     color: 'white',
     fontSize: 16,
   },
+  logo: {
+    width: screenWidth * 0.6, 
+    height: screenWidth * 0.6,
+    margin: 40,
+    overflow: 'visible'
+  }
 });
 
 export default connect()(Home);

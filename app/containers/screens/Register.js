@@ -1,8 +1,10 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, StyleSheet, Image, Dimensions } from 'react-native';
 import { connect } from 'react-redux';
 import Input from '../../components/common/input';
 import Button from '../../components/common/button';
+
+var screenWidth = Dimensions.get('window').width;
 
 class Register extends React.Component {
 
@@ -24,7 +26,11 @@ class Register extends React.Component {
 
   render() {
     return (
-      <View style={{ alignItems: 'center' }}>
+      <View style={styles.container}>
+        <Image
+          style={styles.logo}
+          source={require('../../../assets/conosco_logo(sem_fundo).png')}
+        />
         <Input
           onChange={(name) => this.setState({ name })}
           value={this.state.name}
@@ -45,9 +51,10 @@ class Register extends React.Component {
           value={this.state.password}
           placeholder={'Senha'}
         />
+        <Text>{'\n \n \n \n \n'}</Text>
         <Button
           text={'Cadastrar e entrar'}
-          color={'#F29F99'}
+          color={'#88A379'}
           textColor={'#fff'}
           icon={null}
           press={() => { }}
@@ -56,5 +63,24 @@ class Register extends React.Component {
     );
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: 'rgb(79, 133, 134)',
+  },
+
+  logo: {
+    width: screenWidth * 0.3, 
+    height: screenWidth * 0.3,
+    // margin: 40,
+    overflow: 'visible',
+    position: 'absolute',
+        top: 15,
+  }
+});
 
 export default connect()(Register);
