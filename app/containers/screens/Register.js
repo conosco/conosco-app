@@ -8,11 +8,11 @@ var screenWidth = Dimensions.get('window').width;
 
 class Register extends React.Component {
 
-  static navigationOptions = ({ navigation }) => {
-		return {
-			headerTitle: <Text style={{ fontWeight: 'bold', color: '#2a2a2a', fontSize: 14 }}>Cadastrar</Text>,
-		};
-	}
+  static navigationOptions = () => {
+    return {
+      headerTitle: <Text style={{ fontWeight: 'bold', color: '#2a2a2a', fontSize: 14 }}>Cadastrar</Text>,
+    };
+  }
 
   constructor(props) {
     super(props);
@@ -47,12 +47,12 @@ class Register extends React.Component {
           placeholder={'Nome de usuário'}
         />
         <Input
-          onChange={(password) => this.setState({password})}
+          onChange={(password) => this.setState({ password })}
           value={this.state.password}
           placeholder={'Senha'}
         />
-        <Text>{'\n \n \n \n \n'}</Text>
         <Button
+          styleProps={{ marginTop: 40 }}
           text={'Cadastrar e entrar'}
           color={'#88A379'}
           textColor={'#fff'}
@@ -74,12 +74,11 @@ const styles = StyleSheet.create({
   },
 
   logo: {
-    width: screenWidth * 0.3, 
+    width: screenWidth * 0.3,
     height: screenWidth * 0.3,
-    // margin: 40,
     overflow: 'visible',
     position: 'absolute',
-        top: 15,
+    top: 15,
   }
 });
 

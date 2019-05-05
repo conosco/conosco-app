@@ -12,6 +12,5 @@ export default StyleSheet.create({
     borderRadius: 10,
     padding: 8,
     margin: 15,
-    top: 80
   },
 });
