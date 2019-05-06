@@ -14,11 +14,11 @@ import Button from '../../components/common/button';
 import HeaderTitle from '../../components/common/Header/headerTitle';
 import HeaderBackButton from '../../components/common/Header/headerBackButton';
 
-class Register extends React.Component {
+class Login extends React.Component {
 
   static navigationOptions = ({ navigation }) => {
     return {
-      headerTitle: <HeaderTitle title={'Cadastre-se'} />,
+      headerTitle: <HeaderTitle title={'Entre com e-mail'} />,
       headerLeft: <HeaderBackButton tintColor={'#fff'} onPress={() => navigation.goBack()} />,
     };
   }
@@ -26,9 +26,7 @@ class Register extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: '',
       email: '',
-      username: '',
       password: '',
     };
   }
@@ -38,25 +36,12 @@ class Register extends React.Component {
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style={styles.container}>
           <Input
-            onChange={(name) => this.setState({ name })}
-            value={this.state.name}
-            placeholder={'Nome'}
-            autoFocus
-            autoCorrect={false}
-            capitalize
-          />
-          <Input
             onChange={(email) => this.setState({ email })}
             value={this.state.email}
             placeholder={'E-mail'}
             autoCorrect={false}
+            autoFocus
             type={'email-address'}
-          />
-          <Input
-            onChange={(username) => this.setState({ username })}
-            value={this.state.username}
-            placeholder={'Nome de usuário'}
-            autoCorrect={false}
           />
           <Input
             onChange={(password) => this.setState({ password })}
@@ -67,11 +52,11 @@ class Register extends React.Component {
           />
           <Button
             styleProps={styles.button}
-            text={'Cadastrar e entrar'}
+            text={'Entrar'}
             color={'#88A379'}
             textColor={'#fff'}
             icon={null}
-            press={() => { }}
+            press={() => this.props.navigation.navigate('tabScreens')}
           />
           <KeyboardSpacer />
         </View>
@@ -85,13 +70,12 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
     alignItems: 'center',
-    justifyContent: 'center',
     backgroundColor: 'rgb(79, 133, 134)',
   },
 
   button: {
-    marginTop: 40,
+    marginTop: 20,
   }
 });
 
-export default connect()(Register);
+export default connect()(Login);

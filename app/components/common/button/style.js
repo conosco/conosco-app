@@ -15,8 +15,8 @@ export default StyleSheet.create({
   },
 
   image: {
-    width: 24,
     height: 24,
+    width: 24,
     position: 'absolute',
     left: 12,
   },

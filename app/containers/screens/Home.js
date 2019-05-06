@@ -8,7 +8,8 @@ import { logIn } from '../../actions/user';
 import Button from '../../components/common/button';
 import SeparatorOr from '../../components/common/separator';
 
-const fb = require('../../../assets/fb.png');
+const fb = require('../../../assets/img/fb.png');
+const mail = require('../../../assets/img/mail.png');
 var screenWidth = Dimensions.get('window').width;
 
 class Home extends React.Component {
@@ -17,7 +18,7 @@ class Home extends React.Component {
       <View style={styles.container}>
         <Image
           style={styles.logo}
-          source={require('../../../assets/conosco_logo(sem_fundo).png')}
+          source={require('../../../assets/img/conosco_logo(sem_fundo).png')}
         />
         <Button
           text={'Entrar com Facebook'}
@@ -30,8 +31,8 @@ class Home extends React.Component {
           text={'Entrar com e-mail'}
           color={'#88A379'}
           textColor={'#fff'}
-          icon={null}
-          press={() => {}}
+          icon={mail}
+          press={() => this.props.navigation.navigate('Login')}
         />
         <SeparatorOr />
         <Button
