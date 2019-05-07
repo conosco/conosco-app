@@ -22,6 +22,7 @@ export default StyleSheet.create({
   },
 
   text: {
+    fontFamily: 'Lato',
     fontWeight: 'bold',
     color: '#fff',
     fontSize: 16,
