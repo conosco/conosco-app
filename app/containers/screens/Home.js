@@ -25,14 +25,14 @@ class Home extends React.Component {
           color={'#4267B2'}
           textColor={'#fff'}
           icon={fb}
-          press={() => this.props.dispatch(logIn())}
+          onPress={() => this.props.dispatch(logIn())}
         />
         <Button
           text={'Entrar com e-mail'}
           color={'#88A379'}
           textColor={'#fff'}
           icon={mail}
-          press={() => this.props.navigation.navigate('Login')}
+          onPress={() => this.props.navigation.navigate('Login')}
         />
         <SeparatorOr />
         <Button
@@ -42,7 +42,7 @@ class Home extends React.Component {
           borderColor={'#EFEFED'}
           textColor={'#79A39D'}
           icon={null}
-          press={() => this.props.navigation.navigate('Register')}
+          onPress={() => this.props.navigation.navigate('Register')}
         />
       </View>
     );

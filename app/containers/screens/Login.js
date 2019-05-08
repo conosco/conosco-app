@@ -10,10 +10,13 @@ import KeyboardSpacer from 'react-native-keyboard-spacer';
 
 import Input from '../../components/common/input';
 import Button from '../../components/common/button';
+import Loading from '../../components/common/loading';
 
 import HeaderTitle from '../../components/common/Header/headerTitle';
 import HeaderBackButton from '../../components/common/Header/headerBackButton';
 import { setUser } from '../../actions/user';
+
+import { validateUser } from '../../helpers/validates';
 
 class Login extends React.Component {
 
@@ -30,23 +33,19 @@ class Login extends React.Component {
       email: '',
       password: '',
     };
-    // this.handleLogin = this.handleLogin.bind(this);
   }
 
-  handleLogin(e) {
-    e.preventDefault();
-    var data = new FormData(e.target);
-    console.log("data = ", data)
-
+  login = () => {
     const { dispatch } = this.props;
-
-    dispatch(setUser({
-      email: data.get("username"),
-      password: data.get("password")
-    }));
+    const { email, password } = this.state;
+    const user = { email, password };
+    
+    if (validateUser(user)) dispatch(setUser(user));
   }
 
   render() {
+    const { user } = this.props;
+    if (user.loading) return <Loading />;
     return (
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style={styles.container}>
@@ -71,7 +70,7 @@ class Login extends React.Component {
             color={'#88A379'}
             textColor={'#fff'}
             icon={null}
-            onPress={() => {this.handleLogin.bind(this)}}
+            onPress={this.login}
           />
           <KeyboardSpacer />
         </View>
@@ -83,7 +82,6 @@ class Login extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
     alignItems: 'center',
     backgroundColor: 'rgb(79, 133, 134)',
   },
@@ -93,4 +91,8 @@ const styles = StyleSheet.create({
   }
 });
 
-export default connect()(Login);
+const mapStateToProps = ({ user }) => ({
+  user,
+});
+
+export default connect(mapStateToProps)(Login);

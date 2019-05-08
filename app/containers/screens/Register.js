@@ -71,7 +71,7 @@ class Register extends React.Component {
             color={'#88A379'}
             textColor={'#fff'}
             icon={null}
-            press={() => { }}
+            onPress={() => { }}
           />
           <KeyboardSpacer />
         </View>
