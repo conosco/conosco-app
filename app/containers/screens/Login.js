@@ -13,6 +13,7 @@ import Button from '../../components/common/button';
 
 import HeaderTitle from '../../components/common/Header/headerTitle';
 import HeaderBackButton from '../../components/common/Header/headerBackButton';
+import { setUser } from '../../actions/user';
 
 class Login extends React.Component {
 
@@ -29,6 +30,20 @@ class Login extends React.Component {
       email: '',
       password: '',
     };
+    // this.handleLogin = this.handleLogin.bind(this);
+  }
+
+  handleLogin(e) {
+    e.preventDefault();
+    var data = new FormData(e.target);
+    console.log("data = ", data)
+
+    const { dispatch } = this.props;
+
+    dispatch(setUser({
+      email: data.get("username"),
+      password: data.get("password")
+    }));
   }
 
   render() {
@@ -56,7 +71,7 @@ class Login extends React.Component {
             color={'#88A379'}
             textColor={'#fff'}
             icon={null}
-            press={() => this.props.navigation.navigate('tabScreens')}
+            onPress={() => {this.handleLogin.bind(this)}}
           />
           <KeyboardSpacer />
         </View>
