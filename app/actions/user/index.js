@@ -39,7 +39,7 @@ export const getFacebookUserInfo = token =>
         reject(error);
       }));
 
-export const setUser = user => (dispatch) => {
+export const setUser = (user, navigation) => (dispatch) => {
   dispatch(UserAC.requestLogin());
   userApi.login(user)
     .then(({ status, data }) => {
@@ -48,14 +48,15 @@ export const setUser = user => (dispatch) => {
           token: data.token,
           email: data.user.email,
         }));
+        navigation.navigate('Dashboard');
       }
       else {
         console.log('login error: ', data);
-        // dispatch(UserAC.errorLogin());
+        dispatch(UserAC.errorLogin());
       }
     })
     .catch((error) => {
       console.log('login error: ', error);
-      // dispatch(UserAC.errorLogin());
+      dispatch(UserAC.errorLogin());
     });
 };

@@ -36,11 +36,11 @@ class Login extends React.Component {
   }
 
   login = () => {
-    const { dispatch } = this.props;
+    const { dispatch, navigation } = this.props;
     const { email, password } = this.state;
     const user = { email, password };
     
-    if (validateUser(user)) dispatch(setUser(user));
+    if (validateUser(user)) dispatch(setUser(user, navigation));
   }
 
   render() {
