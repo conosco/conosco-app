@@ -45,10 +45,10 @@ class Login extends React.Component {
 
   render() {
     const { user } = this.props;
-    if (user.loading) return <Loading />;
     return (
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style={styles.container}>
+          { user.loading ? <Loading /> : null }
           <Input
             onChange={(email) => this.setState({ email })}
             value={this.state.email}

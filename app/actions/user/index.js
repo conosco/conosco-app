@@ -51,11 +51,11 @@ export const setUser = user => (dispatch) => {
       }
       else {
         console.log('login error: ', data);
-        dispatch(UserAC.errorLogin());
+        // dispatch(UserAC.errorLogin());
       }
     })
     .catch((error) => {
       console.log('login error: ', error);
-      dispatch(UserAC.errorLogin());
+      // dispatch(UserAC.errorLogin());
     });
 };
