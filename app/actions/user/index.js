@@ -9,16 +9,16 @@ import { sucess } from '../../helpers/requests';
 
 export const logIn = () => (dispatch) => {
   Facebook.logInWithReadPermissionsAsync('2279625532289242', {
-    permissions: ['public_profile'],
+    permissions: ['public_profile', 'email'],
   }).then(({ type, token }) => {
     if (type === 'success') {
       getFacebookUserInfo(token)
-        .then(({ name, picture }) => {
+        .then(({ firstName, picture }) => {
           dispatch(UserAC.userReceived({
-            name,
+            name: firstName,
             picture: picture.data.url,
           }));
-          Alert.alert('Welcome!', `Hi ${name}!`);
+          Alert.alert('Welcome!', `Hi ${firstName}!`);
         })
         .catch(error => console.log('error: ', error));
     } else {
@@ -29,7 +29,7 @@ export const logIn = () => (dispatch) => {
 
 export const getFacebookUserInfo = token =>
   new Promise(async (resolve, reject) =>
-    fetch(`https://graph.facebook.com/me?access_token=${token}&fields=name,picture.type(large)`)
+    fetch(`https://graph.facebook.com/me?access_token=${token}&fields=email,first_name,last_name,picture.type(large)`)
       .then(result => result.json())
       .then((data) => {
         resolve(toCamelCase(data));
