@@ -25,7 +25,7 @@ class Home extends React.Component {
           color={'#4267B2'}
           textColor={'#fff'}
           icon={fb}
-          onPress={() => this.props.dispatch(logIn())}
+          onPress={() => this.props.dispatch(logIn(this.props.navigation))}
         />
         <Button
           text={'Entrar com e-mail'}

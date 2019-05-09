@@ -7,7 +7,7 @@ import userApi from '../../api/userApi';
 
 import { sucess } from '../../helpers/requests';
 
-export const logIn = () => (dispatch) => {
+export const logIn = (navigation) => (dispatch) => {
   Facebook.logInWithReadPermissionsAsync('2279625532289242', {
     permissions: ['public_profile', 'email'],
   }).then(({ type, token }) => {
@@ -18,11 +18,12 @@ export const logIn = () => (dispatch) => {
             name: firstName,
             picture: picture.data.url,
           }));
-          Alert.alert('Welcome!', `Hi ${firstName}!`);
+          Alert.alert('Bem vindo!', `Que bom que você está conosco, ${firstName}!`);
+          navigation.navigate('Dashboard');
         })
         .catch(error => console.log('error: ', error));
     } else {
-      Alert.alert('Cancel!', 'You canceled login with Facebook');
+      Alert.alert('Você cancelou seu login com o Facebook');
     }
   }).catch(({ message }) => Alert.alert(`Facebook Login Error: ${message}`));
 }
@@ -46,8 +47,9 @@ export const setUser = (user, navigation) => (dispatch) => {
       if (sucess(status)) {
         dispatch(UserAC.userReceived({
           token: data.token,
-          email: data.user.email,
+          email: user.email,
         }));
+        Alert.alert('Bem vindo!', `Que bom que você está conosco!`);
         navigation.navigate('Dashboard');
       }
       else {
