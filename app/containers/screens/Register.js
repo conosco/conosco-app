@@ -6,6 +6,9 @@ import {
   View,
 } from 'react-native';
 import { connect } from 'react-redux';
+import { ImagePicker } from 'expo';
+import { Permissions } from 'expo';
+
 import KeyboardSpacer from 'react-native-keyboard-spacer';
 
 import Input from '../../components/common/input';
@@ -30,8 +33,19 @@ class Register extends React.Component {
       email: '',
       username: '',
       password: '',
+      uri: '',
     };
   }
+
+  selectAvatar = () =>
+    Permissions.askAsync(Permissions.CAMERA_ROLL).then(({ status }) => {
+      if (status === 'granted') {
+        ImagePicker.launchImageLibraryAsync({
+          allowsEditing: true,
+          aspect: [4, 3],
+        }).then(({ uri }) => this.setState({ uri }));
+      }
+    });
 
   render() {
     return (
@@ -64,6 +78,14 @@ class Register extends React.Component {
             placeholder={'Senha'}
             autoCorrect={false}
             secure
+          />
+          <Button
+            styleProps={styles.button}
+            text={'Selecionar Foto'}
+            color={'#6DBCD6'}
+            textColor={'#fff'}
+            icon={null}
+            onPress={this.selectAvatar}
           />
           <Button
             styleProps={styles.button}
