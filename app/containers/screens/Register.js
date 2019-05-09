@@ -6,14 +6,23 @@ import {
   View,
 } from 'react-native';
 import { connect } from 'react-redux';
+import { ImagePicker } from 'expo';
+import { Permissions } from 'expo';
+
 import KeyboardSpacer from 'react-native-keyboard-spacer';
+
+import uploadImageAsync from '../../helpers/firebase';
 
 import Input from '../../components/common/input';
 import Button from '../../components/common/button';
+import Loading from '../../components/common/loading';
 
 import HeaderTitle from '../../components/common/Header/headerTitle';
 import HeaderBackButton from '../../components/common/Header/headerBackButton';
 import { register } from '../../actions/user';
+import { validateRegister } from '../../helpers/validates';
+
+console.disableYellowBox = true;
 
 class Register extends React.Component {
 
@@ -28,25 +37,42 @@ class Register extends React.Component {
     super(props);
     this.state = {
       firstName: '',
-      lastName: '',
+      lastName: 'vazio',
       email: '',
       password: '',
-      picture: ''
+      picture: '',
+      loading: false
     };
   }
+
+  selectAvatar = () =>
+    Permissions.askAsync(Permissions.CAMERA_ROLL).then(({ status }) => {
+      if (status === 'granted') {
+        ImagePicker.launchImageLibraryAsync({
+          allowsEditing: true,
+          aspect: [4, 3],
+        }).then(({ uri }) => {
+          this.setState({ loading: true });
+          uploadImageAsync(uri)
+            .then(picture => this.setState({ picture, loading: false }))
+            .catch(() => this.setState({ loading: false }));
+        });
+      }
+    });
 
   register = () => {
     const { dispatch, navigation } = this.props;
     const { email, password, firstName, picture, lastName } = this.state;
     const user = { email, password, firstName, lastName, picture };
     
-    dispatch(register(user, navigation));
+    if (validateRegister(user)) dispatch(register(user, navigation));
   }
 
   render() {
     return (
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style={styles.container}>
+          { this.state.loading ? <Loading /> : null }
           <Input
             onChange={(firstName) => this.setState({ firstName })}
             value={this.state.firstName}
@@ -68,6 +94,14 @@ class Register extends React.Component {
             placeholder={'Senha'}
             autoCorrect={false}
             secure
+          />
+          <Button
+            styleProps={styles.button}
+            text={'Selecionar Foto'}
+            color={'#6DBCD6'}
+            textColor={'#fff'}
+            icon={null}
+            onPress={this.selectAvatar}
           />
           <Button
             styleProps={styles.button}
