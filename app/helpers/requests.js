@@ -1,0 +1,1 @@
+export const sucess = status => status >= 200 && status <= 300;
