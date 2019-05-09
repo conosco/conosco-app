@@ -45,11 +45,14 @@ export const setUser = (user, navigation) => (dispatch) => {
   userApi.login(user)
     .then(({ status, data }) => {
       if (sucess(status)) {
+        console.log(data)
         dispatch(UserAC.userReceived({
           token: data.token,
-          email: user.email,
+          email: data.email,
+          name: data.name,
+          picture: data.picture
         }));
-        Alert.alert('Bem vindo!', `Que bom que você está conosco!`);
+        Alert.alert('Bem vindo!', 'Que bom que você está conosco!');
         navigation.navigate('Dashboard');
       }
       else {
