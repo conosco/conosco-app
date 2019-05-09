@@ -45,7 +45,6 @@ export const setUser = (user, navigation) => (dispatch) => {
   userApi.login(user)
     .then(({ status, data }) => {
       if (sucess(status)) {
-        console.log(data)
         dispatch(UserAC.userReceived({
           token: data.token,
           email: data.email,
@@ -64,4 +63,22 @@ export const setUser = (user, navigation) => (dispatch) => {
       console.log('login error: ', error);
       dispatch(UserAC.errorLogin());
     });
+};
+
+export const register = (user, navigation) => () => {
+  userApi.register(user)
+    .then(({ status, data }) => {
+      if (sucess(status)) {
+        Alert.alert('Agora você está conosco!');
+        navigation.navigate('Login');
+      }
+      else {
+        console.log('register error: ', data);
+        Alert.alert('Erro ao cadastrar');
+      }
+    })
+    .catch((error) => {
+      console.log('register error: ', error);
+      Alert.alert('Erro ao cadastrar');
+    })
 };

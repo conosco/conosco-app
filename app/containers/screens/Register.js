@@ -11,11 +11,18 @@ import { Permissions } from 'expo';
 
 import KeyboardSpacer from 'react-native-keyboard-spacer';
 
+import uploadImageAsync from '../../helpers/firebase';
+
 import Input from '../../components/common/input';
 import Button from '../../components/common/button';
+import Loading from '../../components/common/loading';
 
 import HeaderTitle from '../../components/common/Header/headerTitle';
 import HeaderBackButton from '../../components/common/Header/headerBackButton';
+import { register } from '../../actions/user';
+import { validateRegister } from '../../helpers/validates';
+
+console.disableYellowBox = true;
 
 class Register extends React.Component {
 
@@ -29,11 +36,12 @@ class Register extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: '',
+      firstName: '',
+      lastName: 'vazio',
       email: '',
-      username: '',
       password: '',
-      uri: '',
+      picture: '',
+      loading: false
     };
   }
 
@@ -43,17 +51,31 @@ class Register extends React.Component {
         ImagePicker.launchImageLibraryAsync({
           allowsEditing: true,
           aspect: [4, 3],
-        }).then(({ uri }) => this.setState({ uri }));
+        }).then(({ uri }) => {
+          this.setState({ loading: true });
+          uploadImageAsync(uri)
+            .then(picture => this.setState({ picture, loading: false }))
+            .catch(() => this.setState({ loading: false }));
+        });
       }
     });
+
+  register = () => {
+    const { dispatch, navigation } = this.props;
+    const { email, password, firstName, picture, lastName } = this.state;
+    const user = { email, password, firstName, lastName, picture };
+    
+    if (validateRegister(user)) dispatch(register(user, navigation));
+  }
 
   render() {
     return (
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style={styles.container}>
+          { this.state.loading ? <Loading /> : null }
           <Input
-            onChange={(name) => this.setState({ name })}
-            value={this.state.name}
+            onChange={(firstName) => this.setState({ firstName })}
+            value={this.state.firstName}
             placeholder={'Nome'}
             autoFocus
             autoCorrect={false}
@@ -65,12 +87,6 @@ class Register extends React.Component {
             placeholder={'E-mail'}
             autoCorrect={false}
             type={'email-address'}
-          />
-          <Input
-            onChange={(username) => this.setState({ username })}
-            value={this.state.username}
-            placeholder={'Nome de usuário'}
-            autoCorrect={false}
           />
           <Input
             onChange={(password) => this.setState({ password })}
@@ -93,7 +109,7 @@ class Register extends React.Component {
             color={'#6DBCD6'}
             textColor={'#fff'}
             icon={null}
-            onPress={() => { }}
+            onPress={this.register}
           />
           <KeyboardSpacer />
         </View>
