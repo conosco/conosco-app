@@ -68,7 +68,7 @@ class Register extends React.Component {
           <Button
             styleProps={styles.button}
             text={'Cadastrar e entrar'}
-            color={'#88A379'}
+            color={'#6DBCD6'}
             textColor={'#fff'}
             icon={null}
             onPress={() => { }}
@@ -86,7 +86,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: 'rgb(79, 133, 134)',
+    backgroundColor: '#4D9BA3',
   },
 
   button: {

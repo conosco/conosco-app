@@ -17,7 +17,7 @@ const navigationIcon = (iconFocused, iconDefault) =>
 const back = require('../../../assets/img/back.png');
 
 const headerStyle = {
-  backgroundColor: 'rgb(79, 133, 134)',
+  backgroundColor: '#4D9BA3',
   borderBottomWidth: 0,
 };
 

@@ -29,7 +29,7 @@ class Home extends React.Component {
         />
         <Button
           text={'Entrar com e-mail'}
-          color={'#88A379'}
+          color={'#6DBCD6'}
           textColor={'#fff'}
           icon={mail}
           onPress={() => this.props.navigation.navigate('Login')}
@@ -55,7 +55,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: 'rgb(79, 133, 134)'
+    backgroundColor: '#4D9BA3'
   },
   logo: {
     width: screenWidth * 0.6, 

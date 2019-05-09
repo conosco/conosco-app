@@ -67,7 +67,7 @@ class Login extends React.Component {
           <Button
             styleProps={styles.button}
             text={'Entrar'}
-            color={'#88A379'}
+            color={'#6DBCD6'}
             textColor={'#fff'}
             icon={null}
             onPress={this.login}
@@ -83,7 +83,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
-    backgroundColor: 'rgb(79, 133, 134)',
+    backgroundColor: '#4D9BA3',
   },
 
   button: {

@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: 'rgb(79, 133, 134)'
+    backgroundColor: '#4D9BA3'
   }
 });
 
