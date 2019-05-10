@@ -3,7 +3,7 @@ import { TextInput } from 'react-native';
 
 import style from './style';
 
-const Input = ({ onChange, value, placeholder, autoFocus, autoCorrect, type, capitalize, secure }) => (
+const input = ({ onChange, value, placeholder, autoFocus, autoCorrect, type, capitalize, secure }) => (
   <TextInput
     style={style.content}
     onChangeText={onChange}
@@ -17,5 +17,7 @@ const Input = ({ onChange, value, placeholder, autoFocus, autoCorrect, type, cap
     secureTextEntry={secure}
   />
 );
+
+var Input = React.createFactory((input));
 
 export default Input;

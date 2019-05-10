@@ -11,7 +11,6 @@ import KeyboardSpacer from 'react-native-keyboard-spacer';
 import Input from '../../components/common/input';
 import Button from '../../components/common/button';
 import Loading from '../../components/common/loading';
-
 import HeaderTitle from '../../components/common/Header/headerTitle';
 import HeaderBackButton from '../../components/common/Header/headerBackButton';
 import { setUser } from '../../actions/user';
