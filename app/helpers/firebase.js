@@ -2,13 +2,13 @@ import uuid from 'uuid';
 
 import firebase from '../../firebase';
 
-async function uploadImageAsync(uri) {
+uploadImage = async (uri, callback) => {
   const blob = await new Promise((resolve, reject) => {
     const xhr = new XMLHttpRequest();
-    xhr.onload = function() {
+    xhr.onload = function () {
       resolve(xhr.response);
     };
-    xhr.onerror = function(e) {
+    xhr.onerror = function (e) {
       console.log(e);
       reject(new TypeError('Network request failed'));
     };
@@ -17,15 +17,30 @@ async function uploadImageAsync(uri) {
     xhr.send(null);
   });
 
-  const ref = firebase
+  const ext = uri.split('.').pop();
+  const filename = `${uuid()}.${ext}`;
+  const uploadTask = firebase
     .storage()
-    .ref()
-    .child(uuid.v4());
-  const snapshot = await ref.put(blob);
+    .ref(`images/${filename}`)
+    .put(blob);
 
-  blob.close();
+  uploadTask.on(
+      firebase.storage.TaskEvent.STATE_CHANGED,
+      snapshot => {
+        let progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        callback({ progress });
+      },
+      error => {
+        unsubscribe();
+        callback({ loading: false });
+        console.log('error storage: ', error);
+      },
+      () => {
+        uploadTask.snapshot.ref
+          .getDownloadURL()
+          .then(downloadURL => callback({ picture: downloadURL, loading: false }));
+      },
+    );
+};
 
-  return await snapshot.ref.getDownloadURL();
-}
-
-export default uploadImageAsync;
+export default uploadImage;
