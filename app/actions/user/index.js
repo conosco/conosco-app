@@ -44,6 +44,7 @@ export const setUser = (user, navigation) => (dispatch) => {
   dispatch(UserAC.requestLogin());
   userApi.login(user)
     .then(({ status, data }) => {
+      console.log('data: ', data)
       if (sucess(status)) {
         dispatch(UserAC.userReceived({
           token: data.token,

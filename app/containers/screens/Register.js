@@ -38,7 +38,7 @@ class Register extends React.Component {
     this.state = {
       user: {
         firstName: '',
-        lastName: 'vazio',
+        lastName: '',
         email: '',
         password: '',
         picture: '',
@@ -70,7 +70,7 @@ class Register extends React.Component {
     const { email, password, firstName, lastName } = this.state.user;
     const { picture } = this.state.storage;
     const user = { email, password, firstName, lastName, picture };
-
+    console.log(user)
     if (validateRegister(user)) dispatch(register(user, navigation));
   }
 
@@ -91,23 +91,31 @@ class Register extends React.Component {
             callback={uploaded => this.setState({ uploaded })}
           />
           <Input
-            onChange={(firstName) => this.setState({ firstName })}
-            value={this.state.firstName}
-            placeholder={'Nome'}
+            onChange={(firstName) => this.setState({ ...this.state, user: {...this.state.user, firstName} })}
+            value={this.state.user.firstName}
+            placeholder={'Primeiro Nome'}
             autoFocus
             autoCorrect={false}
             capitalize
           />
           <Input
-            onChange={(email) => this.setState({ email })}
-            value={this.state.email}
+            onChange={(lastName) => this.setState({ ...this.state, user: {...this.state.user, lastName} })}
+            value={this.state.user.lastName}
+            placeholder={'Último Nome'}
+            autoFocus
+            autoCorrect={false}
+            capitalize
+          />
+          <Input
+            onChange={(email) => this.setState({ ...this.state, user: {...this.state.user, email} })}
+            value={this.state.user.email}
             placeholder={'E-mail'}
             autoCorrect={false}
             type={'email-address'}
           />
           <Input
-            onChange={(password) => this.setState({ password })}
-            value={this.state.password}
+            onChange={(password) => this.setState({ ...this.state, user: {...this.state.user, password} })}
+            value={this.state.user.password}
             placeholder={'Senha'}
             autoCorrect={false}
             secure
