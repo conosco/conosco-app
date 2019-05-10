@@ -20,6 +20,7 @@ import HeaderBackButton from '../../components/common/Header/headerBackButton';
 import { register } from '../../actions/user';
 import { validateRegister } from '../../helpers/validates';
 import uploadImage from '../../helpers/firebase';
+import Avatar from '../../components/common/avatar';
 
 console.disableYellowBox = true;
 
@@ -47,6 +48,7 @@ class Register extends React.Component {
         loading: false,
         picture: '',
       },
+      uploaded: null,
     };
   }
 
@@ -73,9 +75,21 @@ class Register extends React.Component {
   }
 
   render() {
+    const { loading, progress, picture } = this.state.storage;
+    const { uploaded } = this.state;
+
     return (
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style={styles.container}>
+          <Avatar
+            size={100}
+            progress={progress}
+            loading={loading}
+            uploaded={uploaded}
+            uri={picture}
+            onPress={this.selectAvatar}
+            callback={uploaded => this.setState({ uploaded })}
+          />
           <Input
             onChange={(firstName) => this.setState({ firstName })}
             value={this.state.firstName}
@@ -97,16 +111,6 @@ class Register extends React.Component {
             placeholder={'Senha'}
             autoCorrect={false}
             secure
-          />
-          <Button
-            styleProps={styles.button}
-            text={'Selecionar Foto'}
-            color={'#6DBCD6'}
-            textColor={'#fff'}
-            icon={null}
-            onPress={this.selectAvatar}
-            progressive
-            loading={this.state.storage.loading}
           />
           <Button
             styleProps={styles.button}
