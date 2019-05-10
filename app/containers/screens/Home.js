@@ -3,13 +3,9 @@ import { StyleSheet, View, Image, Dimensions } from 'react-native';
 
 import { connect } from 'react-redux';
 
-import { logIn } from '../../actions/user';
-
-import Button from '../../components/common/button';
+import ButtonFactory from '../../components/common/button/buttonFactory';
 import SeparatorOr from '../../components/common/separator';
 
-const fb = require('../../../assets/img/fb.png');
-const mail = require('../../../assets/img/mail.png');
 var screenWidth = Dimensions.get('window').width;
 
 class Home extends React.Component {
@@ -20,30 +16,10 @@ class Home extends React.Component {
           style={styles.logo}
           source={require('../../../assets/img/conosco_logo(sem_fundo).png')}
         />
-        <Button
-          text={'Entrar com Facebook'}
-          color={'#4267B2'}
-          textColor={'#fff'}
-          icon={fb}
-          onPress={() => this.props.dispatch(logIn(this.props.navigation))}
-        />
-        <Button
-          text={'Entrar com e-mail'}
-          color={'#6DBCD6'}
-          textColor={'#fff'}
-          icon={mail}
-          onPress={() => this.props.navigation.navigate('Login')}
-        />
+        { ButtonFactory.build('facebook',this.props) }
+        { ButtonFactory.build('email',this.props) }
         <SeparatorOr />
-        <Button
-          text={'Cadastrar'}
-          color={'#fff'}
-          border
-          borderColor={'#EFEFED'}
-          textColor={'#79A39D'}
-          icon={null}
-          onPress={() => this.props.navigation.navigate('Register')}
-        />
+        { ButtonFactory.build('register',this.props) }
       </View>
     );
   }
