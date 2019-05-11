@@ -1,11 +1,10 @@
 import React from 'react';
-import Button from './index'
-import { connect } from 'react-redux';
+import Button from '../../components/common/button/index'
 
-import { logIn } from '../../../actions/user/';
+import { logIn } from '../../actions/user';
 
-const fb = require('../../../../assets/img/fb.png'); 
-const mail = require('../../../../assets/img/mail.png');
+const fb = require('../../../assets/img/fb.png');
+const mail = require('../../../assets/img/mail.png');
 
 class ButtonFactory {
     static build(data, props) {

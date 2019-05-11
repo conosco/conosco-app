@@ -3,7 +3,7 @@ import { StyleSheet, View, Image, Dimensions } from 'react-native';
 
 import { connect } from 'react-redux';
 
-import ButtonFactory from '../../components/common/button/buttonFactory';
+import ButtonFactory from '../../factory/button/index';
 import SeparatorOr from '../../components/common/separator';
 
 var screenWidth = Dimensions.get('window').width;
