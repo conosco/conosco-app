@@ -25,7 +25,7 @@ export const validateRegister = user => {
     showAlert('Senha não deve estar vazia!');
     return false;
   }
-  if (user.picture === '') {
+  if (user.profilePic === '') {
     showAlert('Deve selecionar uma foto!');
     return false;
   }

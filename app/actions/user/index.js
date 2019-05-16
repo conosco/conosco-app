@@ -13,10 +13,10 @@ export const logIn = (navigation) => (dispatch) => {
   }).then(({ type, token }) => {
     if (type === 'success') {
       getFacebookUserInfo(token)
-        .then(({ firstName, picture }) => {
+        .then(({ firstName, profilePic }) => {
           dispatch(UserAC.userReceived({
             name: firstName,
-            picture: picture.data.url,
+            profilePic: profilePic.data.url,
           }));
           Alert.alert('Bem vindo!', `Que bom que você está conosco, ${firstName}!`);
           navigation.navigate('Dashboard');
@@ -50,7 +50,7 @@ export const setUser = (user, navigation) => (dispatch) => {
           token: data.token,
           email: data.email,
           name: data.name,
-          picture: data.picture
+          profilePic: data.profilePic
         }));
         Alert.alert('Bem vindo!', 'Que bom que você está conosco!');
         navigation.navigate('Dashboard');

@@ -23,7 +23,7 @@ const formatApiResult = (result) => {
 const createAxiosService = () => {
   const timeout = 14000;
 
-  const baseURL = 'http://localhost:3000';
+  const baseURL = 'http://localhost:3000/api/v1/';
 
   const axiosService = axios.create({ baseURL, timeout });
   axiosService.interceptors.response.use(

@@ -38,7 +38,7 @@ uploadImage = async (uri, callback) => {
       () => {
         uploadTask.snapshot.ref
           .getDownloadURL()
-          .then(downloadURL => callback({ picture: downloadURL, loading: false }));
+          .then(downloadURL => callback({ profilePic: downloadURL, loading: false }));
       },
     );
 };

@@ -41,12 +41,12 @@ class Register extends React.Component {
         lastName: '',
         email: '',
         password: '',
-        picture: '',
+        profilePic: '',
       },
       storage: {
         progress: 0,
         loading: false,
-        picture: '',
+        profilePic: '',
       },
       uploaded: null,
     };
@@ -68,14 +68,14 @@ class Register extends React.Component {
   register = () => {
     const { dispatch, navigation } = this.props;
     const { email, password, firstName, lastName } = this.state.user;
-    const { picture } = this.state.storage;
-    const user = { email, password, firstName, lastName, picture };
+    const { profilePic } = this.state.storage;
+    const user = { email, password, firstName, lastName, profilePic };
     console.log(user)
     if (validateRegister(user)) dispatch(register(user, navigation));
   }
 
   render() {
-    const { loading, progress, picture } = this.state.storage;
+    const { loading, progress, profilePic } = this.state.storage;
     const { uploaded } = this.state;
 
     return (
@@ -86,7 +86,7 @@ class Register extends React.Component {
             progress={progress}
             loading={loading}
             uploaded={uploaded}
-            uri={picture}
+            uri={profilePic}
             onPress={this.selectAvatar}
             callback={uploaded => this.setState({ uploaded })}
           />
