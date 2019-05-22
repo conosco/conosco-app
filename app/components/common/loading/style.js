@@ -5,12 +5,13 @@ const { height, width } = Dimensions.get('window');
 export default StyleSheet.create({
 
   container: {
-    backgroundColor: 'transparent',
+    backgroundColor: 'rgba(100, 100, 100, 0.3)',
     marginTop: height/2 - 80,
     position: 'absolute',
-    backgroundColor: 'transparent',
     height,
     width,
+    justifyContent: 'center',
+    zIndex: 5,
   },
 
   centered: {
