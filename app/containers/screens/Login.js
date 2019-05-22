@@ -9,7 +9,7 @@ import { connect } from 'react-redux';
 import KeyboardSpacer from 'react-native-keyboard-spacer';
 
 import Input from '../../components/common/input';
-import Button from '../../components/common/button';
+import ButtonFactory from '../../factory/button/index';
 import Loading from '../../components/common/loading';
 import HeaderTitle from '../../components/common/Header/headerTitle';
 import HeaderBackButton from '../../components/common/Header/headerBackButton';
@@ -63,14 +63,7 @@ class Login extends React.Component {
             autoCorrect={false}
             secure
           />
-          <Button
-            styleProps={styles.button}
-            text={'Entrar'}
-            color={'#6DBCD6'}
-            textColor={'#fff'}
-            icon={null}
-            onPress={this.login}
-          />
+        { ButtonFactory.build('login',{...this.props, login: this.login }) }
           <KeyboardSpacer />
         </View>
       </TouchableWithoutFeedback>

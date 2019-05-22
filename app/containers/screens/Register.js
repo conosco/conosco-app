@@ -12,7 +12,7 @@ import { Permissions } from 'expo';
 import KeyboardSpacer from 'react-native-keyboard-spacer';
 
 import Input from '../../components/common/input';
-import Button from '../../components/common/button';
+import ButtonFactory from '../../factory/button/index';
 import Loading from '../../components/common/loading';
 
 import HeaderTitle from '../../components/common/Header/headerTitle';
@@ -120,14 +120,7 @@ class Register extends React.Component {
             autoCorrect={false}
             secure
           />
-          <Button
-            styleProps={styles.button}
-            text={'Cadastrar e entrar'}
-            color={'#6DBCD6'}
-            textColor={'#fff'}
-            icon={null}
-            onPress={this.register}
-          />
+        { ButtonFactory.build('register-login',{...this.props, register: this.register }) }
           <KeyboardSpacer />
         </View>
       </TouchableWithoutFeedback>

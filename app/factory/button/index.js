@@ -1,5 +1,6 @@
 import React from 'react';
 import Button from '../../components/common/button/index'
+import { StyleSheet } from 'react-native';
 
 import { logIn } from '../../actions/user';
 
@@ -26,7 +27,7 @@ class ButtonFactory {
                 onPress={() => props.navigation.navigate('Login')}
               />
             case 'register':
-            return <Button
+              return <Button
                 text={'Cadastrar'}
                 color={'#fff'}
                 border
@@ -35,9 +36,38 @@ class ButtonFactory {
                 icon={null}
                 onPress={() => props.navigation.navigate('Register')}
               />
+            case 'login':
+              return <Button
+              styleProps={styles.buttonLogin}
+              text={'Entrar'}
+              color={'#6DBCD6'}
+              textColor={'#fff'}
+              icon={null}
+              onPress={props.login}
+            />
+            case 'register-login':
+                return <Button
+                styleProps={styles.buttonRegister}
+                text={'Cadastrar e entrar'}
+                color={'#6DBCD6'}
+                textColor={'#fff'}
+                icon={null}
+                onPress={props.register}
+              />
+  
             default:
                 return undefined;
         }
     }
 }
+
+const styles = StyleSheet.create({
+  buttonLogin: {
+    marginTop: 20,
+  },
+  buttonRegister: {
+    marginTop: 20,
+  }
+});
+
 export default (ButtonFactory);
