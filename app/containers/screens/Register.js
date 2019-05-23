@@ -6,13 +6,23 @@ import {
   View,
 } from 'react-native';
 import { connect } from 'react-redux';
+import { ImagePicker } from 'expo';
+import { Permissions } from 'expo';
+
 import KeyboardSpacer from 'react-native-keyboard-spacer';
 
 import Input from '../../components/common/input';
-import Button from '../../components/common/button';
+import ButtonFactory from '../../factory/button/index';
+import Loading from '../../components/common/loading';
 
 import HeaderTitle from '../../components/common/Header/headerTitle';
 import HeaderBackButton from '../../components/common/Header/headerBackButton';
+import { register } from '../../actions/user';
+import { validateRegister } from '../../helpers/validates';
+import uploadImage from '../../helpers/firebase';
+import Avatar from '../../components/common/avatar';
+
+console.disableYellowBox = true;
 
 class Register extends React.Component {
 
@@ -26,53 +36,91 @@ class Register extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: '',
-      email: '',
-      username: '',
-      password: '',
+      user: {
+        firstName: '',
+        lastName: '',
+        email: '',
+        password: '',
+        profilePic: '',
+      },
+      storage: {
+        progress: 0,
+        loading: false,
+        profilePic: '',
+      },
+      uploaded: null,
     };
   }
 
+  selectAvatar = () =>
+    Permissions.askAsync(Permissions.CAMERA_ROLL).then(({ status }) => {
+      if (status === 'granted') {
+        ImagePicker.launchImageLibraryAsync({
+          allowsEditing: true,
+          aspect: [4, 3],
+        }).then(({ uri }) => {
+          this.setState({ storage: { loading: true }});
+          uploadImage(uri, result => this.setState({ storage: { ...this.state.storage, ...result }}));
+        });
+      }
+    });
+
+  register = () => {
+    const { dispatch, navigation } = this.props;
+    const { email, password, firstName, lastName } = this.state.user;
+    const { profilePic } = this.state.storage;
+    const user = { email, password, firstName, lastName, profilePic };
+    console.log(user)
+    if (validateRegister(user)) dispatch(register(user, navigation));
+  }
+
   render() {
+    const { loading, progress, profilePic } = this.state.storage;
+    const { uploaded } = this.state;
+
     return (
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style={styles.container}>
+          <Avatar
+            size={100}
+            progress={progress}
+            loading={loading}
+            uploaded={uploaded}
+            uri={profilePic}
+            onPress={this.selectAvatar}
+            callback={uploaded => this.setState({ uploaded })}
+          />
           <Input
-            onChange={(name) => this.setState({ name })}
-            value={this.state.name}
-            placeholder={'Nome'}
+            onChange={(firstName) => this.setState({ ...this.state, user: {...this.state.user, firstName} })}
+            value={this.state.user.firstName}
+            placeholder={'Primeiro Nome'}
             autoFocus
             autoCorrect={false}
             capitalize
           />
           <Input
-            onChange={(email) => this.setState({ email })}
-            value={this.state.email}
+            onChange={(lastName) => this.setState({ ...this.state, user: {...this.state.user, lastName} })}
+            value={this.state.user.lastName}
+            placeholder={'Último Nome'}
+            autoFocus
+            autoCorrect={false}
+            capitalize
+          />
+          <Input
+            onChange={(email) => this.setState({ ...this.state, user: {...this.state.user, email} })}
+            value={this.state.user.email}
             placeholder={'E-mail'}
             autoCorrect={false}
             type={'email-address'}
           />
           <Input
-            onChange={(username) => this.setState({ username })}
-            value={this.state.username}
-            placeholder={'Nome de usuário'}
-            autoCorrect={false}
-          />
-          <Input
-            onChange={(password) => this.setState({ password })}
-            value={this.state.password}
+            onChange={(password) => this.setState({ ...this.state, user: {...this.state.user, password} })}
+            value={this.state.user.password}
             placeholder={'Senha'}
             autoCorrect={false}
             secure
           />
-          <Button
-            styleProps={styles.button}
-            text={'Cadastrar e entrar'}
-            color={'#6DBCD6'}
-            textColor={'#fff'}
-            icon={null}
-            onPress={() => { }}
-          />
+        { ButtonFactory.build('register-login',{...this.props, register: this.register }) }
           <KeyboardSpacer />
         </View>
       </TouchableWithoutFeedback>

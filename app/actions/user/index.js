@@ -13,10 +13,10 @@ export const logIn = (navigation) => (dispatch) => {
   }).then(({ type, token }) => {
     if (type === 'success') {
       getFacebookUserInfo(token)
-        .then(({ firstName, picture }) => {
+        .then(({ firstName, profilePic }) => {
           dispatch(UserAC.userReceived({
             name: firstName,
-            picture: picture.data.url,
+            profilePic: profilePic.data.url,
           }));
           Alert.alert('Bem vindo!', `Que bom que você está conosco, ${firstName}!`);
           navigation.navigate('Dashboard');
@@ -44,12 +44,15 @@ export const setUser = (user, navigation) => (dispatch) => {
   dispatch(UserAC.requestLogin());
   userApi.login(user)
     .then(({ status, data }) => {
+      console.log('data: ', data)
       if (sucess(status)) {
         dispatch(UserAC.userReceived({
           token: data.token,
-          email: user.email,
+          email: data.email,
+          name: data.name,
+          profilePic: data.profilePic
         }));
-        Alert.alert('Bem vindo!', `Que bom que você está conosco!`);
+        Alert.alert('Bem vindo!', 'Que bom que você está conosco!');
         navigation.navigate('Dashboard');
       }
       else {
@@ -61,4 +64,22 @@ export const setUser = (user, navigation) => (dispatch) => {
       console.log('login error: ', error);
       dispatch(UserAC.errorLogin());
     });
+};
+
+export const register = (user, navigation) => () => {
+  userApi.register(user)
+    .then(({ status, data }) => {
+      if (sucess(status)) {
+        Alert.alert('Agora você está conosco!');
+        navigation.navigate('Login');
+      }
+      else {
+        console.log('register error: ', data);
+        Alert.alert('Erro ao cadastrar');
+      }
+    })
+    .catch((error) => {
+      console.log('register error: ', error);
+      Alert.alert('Erro ao cadastrar');
+    })
 };
