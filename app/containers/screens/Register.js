@@ -22,6 +22,8 @@ import { validateRegister } from '../../helpers/validates';
 import uploadImage from '../../helpers/firebase';
 import Avatar from '../../components/common/avatar';
 
+import ChangeStyle from '../../components/common/Header/headerBackButton';
+
 console.disableYellowBox = true;
 
 class Register extends React.Component {
@@ -29,7 +31,13 @@ class Register extends React.Component {
   static navigationOptions = ({ navigation }) => {
     return {
       headerTitle: <HeaderTitle title={'Cadastre-se'} />,
-      headerLeft: <HeaderBackButton tintColor={'#fff'} onPress={() => navigation.goBack()} />,
+      headerLeft: ChangeStyle(HeaderBackButton,
+        {
+          HOC: {
+            width: 25,
+            heigth: 30,
+          }
+      }),
     };
   }
 
