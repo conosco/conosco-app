@@ -16,10 +16,10 @@ class Home extends React.Component {
           style={styles.logo}
           source={require('../../../assets/img/conosco_logo(sem_fundo).png')}
         />
-        { ButtonFactory.build('facebook',this.props) }
-        { ButtonFactory.build('email',this.props) }
+        { ButtonFactory.factoryMethod('facebook',this.props) }
+        { ButtonFactory.factoryMethod('email',this.props) }
         <SeparatorOr />
-        { ButtonFactory.build('register',this.props) }
+        { ButtonFactory.factoryMethod('register',this.props) }
       </View>
     );
   }
