@@ -12,3 +12,12 @@ const HeaderBackButton = ({ tintColor, onPress }) => (
 );
 
 export default HeaderBackButton;
+
+export function ChangeStyle(HeaderBackButton, styles) {
+  return class extends React.Component {
+    render() {
+      return <HeaderBackButton {...this.props} styles = {styles.HOC} />;
+    }
+  };
+}
+
