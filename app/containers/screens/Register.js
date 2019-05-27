@@ -120,7 +120,7 @@ class Register extends React.Component {
             autoCorrect={false}
             secure
           />
-        { ButtonFactory.build('register-login',{...this.props, register: this.register }) }
+        { ButtonFactory.factoryMethod('register-login',{...this.props, register: this.register }) }
           <KeyboardSpacer />
         </View>
       </TouchableWithoutFeedback>

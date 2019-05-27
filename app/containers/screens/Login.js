@@ -63,7 +63,7 @@ class Login extends React.Component {
             autoCorrect={false}
             secure
           />
-        { ButtonFactory.build('login',{...this.props, login: this.login }) }
+        { ButtonFactory.factoryMethod('login',{...this.props, login: this.login }) }
           <KeyboardSpacer />
         </View>
       </TouchableWithoutFeedback>

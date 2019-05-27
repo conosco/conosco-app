@@ -8,7 +8,7 @@ const fb = require('../../../assets/img/fb.png');
 const mail = require('../../../assets/img/mail.png');
 
 class ButtonFactory {
-    static build(data, props) {
+    static factoryMethod(data, props) {
         switch (data) {
             case 'facebook':
                 return <Button
