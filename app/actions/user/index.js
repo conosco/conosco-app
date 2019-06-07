@@ -52,8 +52,8 @@ export const setUser = (user, navigation) => (dispatch) => {
           name: data.name,
           profilePic: data.profilePic
         }));
-        Alert.alert('Bem vindo!', 'Que bom que você está conosco!');
-        navigation.navigate('Dashboard');
+        Alert.alert('Bem vindo!', 'Que bom que você está #conosco!');
+        navigation.navigate('Dashboard', {email: data.data.email});
       }
       else {
         console.log('login error: ', data);
@@ -70,7 +70,7 @@ export const register = (user, navigation) => () => {
   userApi.register(user)
     .then(({ status, data }) => {
       if (sucess(status)) {
-        Alert.alert('Agora você está conosco!');
+        Alert.alert('Agora você está #conosco!');
         navigation.navigate('Login');
       }
       else {
@@ -82,4 +82,21 @@ export const register = (user, navigation) => () => {
       console.log('register error: ', error);
       Alert.alert('Erro ao cadastrar');
     })
+};
+
+export const loadUserByEmail = (email) => (dispatch) => {
+  dispatch(MetaAC.syncOperationLoading());
+  userApi.getUserByEmail(email)
+    .then((result) => {
+      if (result.status === 200) {
+        const user_by_email = result.data;
+        dispatch(UserAC.fetchUserByEmail(user_by_email));
+      }
+      dispatch(MetaAC.syncOperationFinished(result));
+    })
+    .catch((error) => {
+      console.log(error);
+      alert('Ocorreu um erro ao carregar o usuário!');
+      dispatch(MetaAC.syncOperationFinished(error));
+    });
 };

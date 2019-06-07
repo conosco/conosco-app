@@ -6,7 +6,16 @@ import Avatar from '../../components/common/avatar';
 import { connect } from 'react-redux';
 
 class Dashboard extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      email: '',
+    };
+  }
+
   render() {
+    const email = this.props.navigation.getParam('email');
+    console.log("email = ", email);
     return (
       <View style={styles.container}>
         <Card style={styles.profileCard}>
