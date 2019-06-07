@@ -44,7 +44,6 @@ export const setUser = (user, navigation) => (dispatch) => {
   dispatch(UserAC.requestLogin());
   userApi.login(user)
     .then(({ status, data }) => {
-      console.log('data: ', data)
       if (sucess(status)) {
         dispatch(UserAC.userReceived({
           token: data.token,
@@ -89,8 +88,8 @@ export const loadUserByEmail = (email) => (dispatch) => {
   userApi.getUserByEmail(email)
     .then((result) => {
       if (result.status === 200) {
-        const user_by_email = result.data;
-        dispatch(UserAC.fetchUserByEmail(user_by_email));
+        const userByEmail = result.data;
+        dispatch(UserAC.fetchUserByEmail(userByEmail));
       }
       dispatch(MetaAC.syncOperationFinished(result));
     })

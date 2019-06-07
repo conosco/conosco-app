@@ -1,21 +1,12 @@
 import React from 'react';
-import { StyleSheet, View, Text } from 'react-native';
-import { Container, Header, Content, Card, CardItem, Body } from 'native-base';
-import Avatar from '../../components/common/avatar';
-
+import { StyleSheet, View } from 'react-native';
+import { Card, CardItem, Body } from 'native-base';
 import { connect } from 'react-redux';
 
-class Dashboard extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      email: '',
-    };
-  }
+import Avatar from '../../components/common/avatar';
 
+class Dashboard extends React.Component {
   render() {
-    const email = this.props.navigation.getParam('email');
-    console.log("email = ", email);
     return (
       <View style={styles.container}>
         <Card style={styles.profileCard}>
@@ -23,7 +14,7 @@ class Dashboard extends React.Component {
             <Body>
               <Avatar
                 size={100}
-                onPress={{}}
+                onPress={() => {}}
                 callback={uploaded => this.setState({ uploaded })}
                 style={{color: '#4D9BA3'}}
               />
@@ -38,9 +29,8 @@ class Dashboard extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
     alignItems: 'center',
-    backgroundColor: '#AAD8DD'
+    backgroundColor: '#AAD8DD',
   },
   profileCard: {
     height: 130, 
@@ -53,4 +43,8 @@ const styles = StyleSheet.create({
   }
 });
 
-export default connect()(Dashboard);
+const mapStateToProps = ({ user }) => ({
+  email: user.email,
+});
+
+export default connect(mapStateToProps)(Dashboard);
