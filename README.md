@@ -7,5 +7,6 @@
 ## How to run
 
 1. ```git clone https://github.com/conosco/conosco-app.git```
-2. ```yarn```
-3. ```expo start```
+2. ```cd conosco-app/```
+3. ```yarn```
+4. ```expo start```
