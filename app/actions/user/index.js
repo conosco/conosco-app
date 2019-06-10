@@ -43,16 +43,17 @@ export const getFacebookUserInfo = token =>
 export const setUser = (user, navigation) => (dispatch) => {
   dispatch(UserAC.requestLogin());
   userApi.login(user)
-    .then(({ status, data }) => {
+    .then(({ status, data: body }) => {
       if (sucess(status)) {
+        const { email, token, name, picture: profilePic } = body.data;
         dispatch(UserAC.userReceived({
-          token: data.token,
-          email: data.email,
-          name: data.name,
-          profilePic: data.profilePic
+          token,
+          email,
+          name,
+          profilePic
         }));
         Alert.alert('Bem vindo!', 'Que bom que você está #conosco!');
-        navigation.navigate('Dashboard', {email: data.data.email});
+        navigation.navigate('Dashboard', {email: body.data.email});
       }
       else {
         console.log('login error: ', data);
@@ -84,19 +85,15 @@ export const register = (user, navigation) => () => {
 };
 
 export const loadUserByEmail = (email) => (dispatch) => {
-  // dispatch(MetaAC.syncOperationLoading());
   userApi.getUserByEmail(email)
     .then((result) => {
       if (result.status === 200) {
         const userByEmail = result.data;
-        console.log("user by email = ", userByEmail);
         dispatch(UserAC.fetchUserByEmail(userByEmail));
       }
-      // dispatch(MetaAC.syncOperationFinished(result));
     })
     .catch((error) => {
       console.log(error);
       alert('Ocorreu um erro ao carregar o usuário!');
-      // dispatch(MetaAC.syncOperationFinished(error));
     });
 };

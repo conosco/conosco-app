@@ -1,31 +1,28 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, Text } from 'react-native';
 import { Card, CardItem, Body } from 'native-base';
 import { connect } from 'react-redux';
 
 import Avatar from '../../components/common/avatar';
-import { loadUserByEmail } from '../../actions/user/index';
 
 class Dashboard extends React.Component {
-  componentWillMount() {
-    const email = this.props.navigation.getParam('email'); 
-		const { dispatch } = this.props;
-		dispatch(loadUserByEmail(email));
-  }
   render() {
-    // console.log("email = ", email);
+    const { user } = this.props;
     return (
       <View style={styles.container}>
         <Card style={styles.profileCard}>
           <CardItem>
             <Body>
               <Avatar
-                size={100}
-                onPress={() => {}}
-                callback={uploaded => this.setState({ uploaded })}
+                size={90}
                 style={{color: '#4D9BA3'}}
+                uploaded
+                uri={user.profilePic}
+                progress={100}
+                callback={() => {}}
               />
             </Body>
+            <Text style={{alignSelf: 'flex-start', position: 'absolute', left: 110, top: 10, fontWeight: 'bold', fontSize: 18 }}>{user.name}</Text>
           </CardItem>
         </Card>
       </View>
@@ -51,7 +48,7 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = ({ user }) => ({
-  email: user.email,
+  user,
 });
 
 export default connect(mapStateToProps)(Dashboard);
