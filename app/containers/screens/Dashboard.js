@@ -4,9 +4,16 @@ import { Card, CardItem, Body } from 'native-base';
 import { connect } from 'react-redux';
 
 import Avatar from '../../components/common/avatar';
+import { loadUserByEmail } from '../../actions/user/index';
 
 class Dashboard extends React.Component {
+  componentWillMount() {
+    const email = this.props.navigation.getParam('email'); 
+		const { dispatch } = this.props;
+		dispatch(loadUserByEmail(email));
+  }
   render() {
+    // console.log("email = ", email);
     return (
       <View style={styles.container}>
         <Card style={styles.profileCard}>

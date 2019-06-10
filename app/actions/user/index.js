@@ -84,18 +84,19 @@ export const register = (user, navigation) => () => {
 };
 
 export const loadUserByEmail = (email) => (dispatch) => {
-  dispatch(MetaAC.syncOperationLoading());
+  // dispatch(MetaAC.syncOperationLoading());
   userApi.getUserByEmail(email)
     .then((result) => {
       if (result.status === 200) {
         const userByEmail = result.data;
+        console.log("user by email = ", userByEmail);
         dispatch(UserAC.fetchUserByEmail(userByEmail));
       }
-      dispatch(MetaAC.syncOperationFinished(result));
+      // dispatch(MetaAC.syncOperationFinished(result));
     })
     .catch((error) => {
       console.log(error);
       alert('Ocorreu um erro ao carregar o usuário!');
-      dispatch(MetaAC.syncOperationFinished(error));
+      // dispatch(MetaAC.syncOperationFinished(error));
     });
 };
