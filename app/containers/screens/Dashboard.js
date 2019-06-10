@@ -4,6 +4,7 @@ import { Card, CardItem, Body } from 'native-base';
 import { connect } from 'react-redux';
 
 import Avatar from '../../components/common/avatar';
+import ProgressBar from '../../components/common/progressBar';
 
 class Dashboard extends React.Component {
   render() {
@@ -23,6 +24,10 @@ class Dashboard extends React.Component {
               />
             </Body>
             <Text style={{alignSelf: 'flex-start', position: 'absolute', left: 110, top: 10, fontWeight: 'bold', fontSize: 18 }}>{user.name}</Text>
+            <View style={{height: 66, justifyContent: "space-between"}}>
+              <ProgressBar width={150} color={"#98E1DF"} backgroundColor={"#EADEE0"} progress={50} title="Descrição"></ProgressBar>
+              <ProgressBar width={150} color={"#478FC8"} backgroundColor={"#EADEE0"} progress={80} title="Determinação"></ProgressBar>
+            </View>
           </CardItem>
         </Card>
       </View>
@@ -38,7 +43,7 @@ const styles = StyleSheet.create({
   },
   profileCard: {
     height: 130, 
-    marginTop: 200,
+    marginTop: 100,
     width: 350,
     borderRadius: 20,
     borderTopEndRadius: 20,
