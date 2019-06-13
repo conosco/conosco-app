@@ -11,4 +11,14 @@ export default StyleSheet.create({
   dynamic: {
     height: 6,
   },
+
+  view: {
+    height: 28
+  },
+
+  title: {
+    fontSize: 12,
+    alignSelf: 'flex-end',
+    marginBottom: 10
+  }
 });

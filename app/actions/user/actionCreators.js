@@ -15,3 +15,8 @@ export const requestLogin = () => ({
 export const errorLogin = () => ({
   type: 'ERROR_LOGIN',
 });
+
+export const fetchUserByEmail = userByEmail => ({
+  type: 'FETCH_USER_BY_EMAIL',
+  userByEmail,
+});

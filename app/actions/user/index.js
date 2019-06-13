@@ -43,17 +43,17 @@ export const getFacebookUserInfo = token =>
 export const setUser = (user, navigation) => (dispatch) => {
   dispatch(UserAC.requestLogin());
   userApi.login(user)
-    .then(({ status, data }) => {
-      console.log('data: ', data)
+    .then(({ status, data: body }) => {
       if (sucess(status)) {
+        const { email, token, name, picture: profilePic } = body.data;
         dispatch(UserAC.userReceived({
-          token: data.token,
-          email: data.email,
-          name: data.name,
-          profilePic: data.profilePic
+          token,
+          email,
+          name,
+          profilePic
         }));
-        Alert.alert('Bem vindo!', 'Que bom que você está conosco!');
-        navigation.navigate('Dashboard');
+        Alert.alert('Bem vindo!', 'Que bom que você está #conosco!');
+        navigation.navigate('Dashboard', {email: body.data.email});
       }
       else {
         console.log('login error: ', data);
@@ -70,7 +70,7 @@ export const register = (user, navigation) => () => {
   userApi.register(user)
     .then(({ status, data }) => {
       if (sucess(status)) {
-        Alert.alert('Agora você está conosco!');
+        Alert.alert('Agora você está #conosco!');
         navigation.navigate('Login');
       }
       else {
@@ -82,4 +82,18 @@ export const register = (user, navigation) => () => {
       console.log('register error: ', error);
       Alert.alert('Erro ao cadastrar');
     })
+};
+
+export const loadUserByEmail = (email) => (dispatch) => {
+  userApi.getUserByEmail(email)
+    .then((result) => {
+      if (result.status === 200) {
+        const userByEmail = result.data;
+        dispatch(UserAC.fetchUserByEmail(userByEmail));
+      }
+    })
+    .catch((error) => {
+      console.log(error);
+      alert('Ocorreu um erro ao carregar o usuário!');
+    });
 };

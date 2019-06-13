@@ -3,6 +3,7 @@ import {
   View,
   Animated,
   Easing,
+  Text
 } from 'react-native';
 
 import style from './style';
@@ -33,9 +34,11 @@ class ProgressBar extends React.Component {
   }
 
   render() {
-    const { color, width, backgroundColor } = this.props;
+    const { color, width, backgroundColor, title } = this.props;
 
     return (
+      <View style={[{ width }, style.view]}>
+        <Text style={style.title}>{title}</Text>
       <View style={[{ width, backgroundColor }, style.bar]}>
         <Animated.View
           style={[
@@ -43,6 +46,7 @@ class ProgressBar extends React.Component {
             { backgroundColor: color, width: this.widthAnimation },
           ]}
         />
+      </View>
       </View>
     );
   }
