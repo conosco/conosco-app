@@ -27,9 +27,10 @@ class Dashboard extends React.Component {
   }
 
   render() {
-    const { user } = this.props;
+    const { user, navigation } = this.props;
     return (
       <View style={styles.container}>
+        <AppModals navigation={navigation} />
         <Card style={styles.profileCard}>
           <CardItem>
             <Body>
