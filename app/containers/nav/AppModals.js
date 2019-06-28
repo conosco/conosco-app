@@ -6,9 +6,11 @@ import PropTypes from 'prop-types';
 import { closeModal } from '../../actions/nav';
 
 import Example from '../popups/example';
+import Groups from '../popups/groups';
 
 const modalComponents = {
-	Example
+	Example,
+	Groups
 };
 
 const modalComponentsIds = Object.keys(modalComponents);

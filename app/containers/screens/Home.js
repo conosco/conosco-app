@@ -5,22 +5,13 @@ import { connect } from 'react-redux';
 
 import ButtonFactory from '../../factory/button/index';
 import SeparatorOr from '../../components/common/separator';
-import AppModals from '../nav/AppModals';
-import { openModal } from '../../actions/nav';
 
 var screenWidth = Dimensions.get('window').width;
 
 class Home extends React.Component {
-  componentDidMount() {
-    const { dispatch } = this.props;
-		dispatch(openModal('Example', { title: 'Example here!' }));
-  }
-
   render() {
-    const { navigation } = this.props;
     return (
       <View style={styles.container}>
-        <AppModals navigation={navigation} />
         <Image
           style={styles.logo}
           source={require('../../../assets/img/conosco_logo(sem_fundo).png')}

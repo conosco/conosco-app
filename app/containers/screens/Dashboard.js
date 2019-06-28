@@ -3,9 +3,10 @@ import { StyleSheet, View, Text, Alert } from 'react-native';
 import { Card, CardItem, Body } from 'native-base';
 import { connect } from 'react-redux';
 import { FloatingAction } from "react-native-floating-action";
-
+import AppModals from '../nav/AppModals';
 import Avatar from '../../components/common/avatar';
 import ProgressBar from '../../components/common/progressBar';
+import { openModal } from '../../actions/nav';
 
 class Dashboard extends React.Component {
   logout() {
@@ -27,7 +28,7 @@ class Dashboard extends React.Component {
   }
 
   render() {
-    const { user, navigation } = this.props;
+    const { user, navigation, dispatch } = this.props;
     return (
       <View style={styles.container}>
         <AppModals navigation={navigation} />
@@ -61,6 +62,7 @@ class Dashboard extends React.Component {
           color='#50946F'
           onPressItem={name => {
             if (name === 'bt_logout') { this.logout() }
+            if (name === 'bt_groups') { dispatch(openModal('Groups', { title: 'ALOOOOOOOOOU!' })); }
           }}
         />
       </View>
@@ -101,13 +103,6 @@ const actions = [
     name: "bt_logout",
     color: '#50946F',
     position: 1
-  },
-  {
-    text: "Novo Hábito",
-    icon: require("../../../assets/icons/new-post.png"),
-    name: "bt_new_habit",
-    color: '#50946F',
-    position: 2
   },
   {
     text: "Meus Hábitos",
