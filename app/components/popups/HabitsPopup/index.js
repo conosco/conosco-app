@@ -9,7 +9,7 @@ import PropTypes from 'prop-types';
 import Popup from '../../common/Popup';
 import style from './style';
 
-const GroupsPopup = ({ title, onOkPress, funcao }) => (
+const HabitsPopup = ({ title, onOkPress, funcao }) => (
 	<Popup>
 		<View style={style.content}>
 			<Text style={style.body}>{title}</Text>
@@ -20,10 +20,10 @@ const GroupsPopup = ({ title, onOkPress, funcao }) => (
 	</Popup>
 );
 
-GroupsPopup.propTypes = {
+HabitsPopup.propTypes = {
   title: PropTypes.string.isRequired,
   onOkPress: PropTypes.func.isRequired,
   funcao: PropTypes.func.isRequired
 };
 
-export default GroupsPopup;
+export default HabitsPopup;
