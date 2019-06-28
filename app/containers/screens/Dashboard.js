@@ -62,8 +62,8 @@ class Dashboard extends React.Component {
           color='#50946F'
           onPressItem={name => {
             if (name === 'bt_logout') { this.logout() }
-            if (name === 'bt_my_habits') { dispatch(openModal('Groups', { title: 'Meus Hábitos! \n  \n \n \n \n \n', funcao: () => console.log('testando modal') })); }
-            if (name === 'bt_groups') { dispatch(openModal('Groups', { title: 'Grupos! \n  \n \n \n \n  \n ', funcao: () => console.log('testando modal') })); }
+            if (name === 'bt_groups') { dispatch(openModal('Groups', { title: 'Grupos!' })); }
+            if (name === 'bt_manage_habits') { dispatch(openModal('ManageGroups', { title: 'Gerenciar Hábitos!' })); }
           }}
         />
       </View>

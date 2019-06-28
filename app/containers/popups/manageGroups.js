@@ -2,9 +2,9 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import GroupsPopup from '../../components/popups/GroupsPopup';
+import ManageGroupsPopup from '../../components/popups/ManageGroupsPopup';
 
-class Groups extends React.Component {
+class ManageGroups extends React.Component {
 	closeModal = () => {
 		const { modal } = this.props;
 		modal.close();
@@ -13,7 +13,7 @@ class Groups extends React.Component {
 	render() {
 		const { modal } = this.props;
 		return (
-      <GroupsPopup
+      <ManageGroupsPopup
         onOkPress={this.closeModal}
         title={modal.params.title}
       />
@@ -21,7 +21,7 @@ class Groups extends React.Component {
 	}
 }
 
-Groups.propTypes = {
+ManageGroups.propTypes = {
 	modal: PropTypes.shape({
 		params: PropTypes.shape({
 			title: PropTypes.string.isRequired
@@ -30,4 +30,4 @@ Groups.propTypes = {
 	}).isRequired
 };
 
-export default connect()(Groups);
+export default connect()(ManageGroups);

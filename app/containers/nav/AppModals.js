@@ -7,12 +7,12 @@ import { closeModal } from '../../actions/nav';
 
 import Example from '../popups/example';
 import Groups from '../popups/groups';
-import Habits from '../popups/habits';
+import ManageGroups from '../popups/manageGroups'
 
 const modalComponents = {
 	Example,
 	Groups,
-	Habits
+	ManageGroups
 };
 
 const modalComponentsIds = Object.keys(modalComponents);
