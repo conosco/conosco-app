@@ -1,17 +1,37 @@
 import React from 'react';
-import { StyleSheet, View, Text } from 'react-native';
+import { StyleSheet, View, Text, Alert } from 'react-native';
 import { Card, CardItem, Body } from 'native-base';
 import { connect } from 'react-redux';
 import { FloatingAction } from "react-native-floating-action";
-
+import AppModals from '../nav/AppModals';
 import Avatar from '../../components/common/avatar';
 import ProgressBar from '../../components/common/progressBar';
+import { openModal } from '../../actions/nav';
 
 class Dashboard extends React.Component {
+  logout() {
+    const { navigation } = this.props;
+
+    Alert.alert(
+      'Já vai?',
+      'Deseja mesmo sair?',
+      [
+        { text: 'Sim', onPress: () => navigation.navigate('Home') },
+        {
+          text: 'Não',
+          onPress: () => console.log('Cancel Pressed'),
+          style: 'cancel',
+        },
+      ],
+      { cancelable: false },
+    );
+  }
+
   render() {
-    const { user } = this.props;
+    const { user, navigation, dispatch } = this.props;
     return (
       <View style={styles.container}>
+        <AppModals navigation={navigation} />
         <Card style={styles.profileCard}>
           <CardItem>
             <Body>
@@ -41,7 +61,8 @@ class Dashboard extends React.Component {
           actions={actions}
           color='#50946F'
           onPressItem={name => {
-            console.log(`selected button: ${name}`);
+            if (name === 'bt_logout') { this.logout() }
+            if (name === 'bt_groups') { dispatch(openModal('Groups', { title: 'ALOOOOOOOOOU!' })); }
           }}
         />
       </View>
@@ -77,9 +98,9 @@ const styles = StyleSheet.create({
 
 const actions = [
   {
-    text: "Novo Hábito",
-    icon: require("../../../assets/icons/new-post.png"),
-    name: "bt_new_habit",
+    text: "Sair",
+    icon: require("../../../assets/icons/logout.png"),
+    name: "bt_logout",
     color: '#50946F',
     position: 1
   },
@@ -88,21 +109,21 @@ const actions = [
     icon: require("../../../assets/icons/my-habits.png"),
     name: "bt_my_habits",
     color: '#50946F',
-    position: 2
+    position: 3
   },
   {
     text: "Gerenciar Hábitos",
     icon: require("../../../assets/icons/manage.png"),
     name: "bt_manage_habits",
     color: '#50946F',
-    position: 3
+    position: 4
   },
   {
     text: "Grupos",
     icon: require("../../../assets/icons/groups.png"),
     name: "bt_groups",
     color: '#50946F',
-    position: 4
+    position: 5
   }
 ];
 
