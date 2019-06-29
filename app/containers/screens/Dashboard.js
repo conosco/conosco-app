@@ -34,7 +34,7 @@ class Dashboard extends React.Component {
   }
 
   render() {
-    const { user, navigation, dispatch } = this.props;
+    const { user, navigation, dispatch, groups } = this.props;
     return (
       <View style={styles.container}>
         <AppModals navigation={navigation} />
@@ -60,6 +60,7 @@ class Dashboard extends React.Component {
         <Card style={styles.areaCard}>
           <CardItem>
             <Body>
+              {console.log("Groups State = "+JSON.stringify(groups))}
             </Body>
           </CardItem>
         </Card>
@@ -135,8 +136,9 @@ const actions = [
   }
 ];
 
-const mapStateToProps = ({ user }) => ({
+const mapStateToProps = ({ user, groups }) => ({
   user,
+  groups
 });
 
 export default connect(mapStateToProps)(Dashboard);
