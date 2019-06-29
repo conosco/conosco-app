@@ -33,8 +33,22 @@ class Dashboard extends React.Component {
     );
   }
 
+  renderTableLine(d, idx) {
+    console.log("D = ",d);
+		return (<tr key={d.id}><View><Text>{d.name}</Text></View></tr>);
+	}
+
   render() {
     const { user, navigation, dispatch, groups } = this.props;
+    const data = [];
+    for (var key in groups) {
+			if(!isNaN(key)) {
+				groups[key].key = key;
+      	data.push(groups[key]);
+			}
+    }
+    // console.log("data = ", data);
+    
     return (
       <View style={styles.container}>
         <AppModals navigation={navigation} />
@@ -61,6 +75,9 @@ class Dashboard extends React.Component {
           <CardItem>
             <Body>
               {console.log("Groups State = "+JSON.stringify(groups))}
+              {/* <Text> */}
+              {data.map((d, idx) => this.renderTableLine(d, idx))}
+              {/* </Text> */}
             </Body>
           </CardItem>
         </Card>
