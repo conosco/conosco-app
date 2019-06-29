@@ -7,8 +7,14 @@ import AppModals from '../nav/AppModals';
 import Avatar from '../../components/common/avatar';
 import ProgressBar from '../../components/common/progressBar';
 import { openModal } from '../../actions/nav';
+import { loadGroups } from '../../actions/group';
 
 class Dashboard extends React.Component {
+	componentDidMount() {
+    const { dispatch, user } = this.props;
+		dispatch(loadGroups(user.token));
+  }
+
   logout() {
     const { navigation } = this.props;
 
@@ -62,7 +68,8 @@ class Dashboard extends React.Component {
           color='#50946F'
           onPressItem={name => {
             if (name === 'bt_logout') { this.logout() }
-            if (name === 'bt_groups') { dispatch(openModal('Groups', { title: 'Grupos!' })); }
+            if (name === 'bt_my_habits') { dispatch(openModal('Groups', { title: 'Meus Hábitos! \n  \n \n \n \n \n', funcao: () => console.log('testando modal') })); }
+            if (name === 'bt_groups') { dispatch(openModal('Groups', { title: 'Grupos' })); }
             if (name === 'bt_manage_habits') { dispatch(openModal('ManageGroups', { title: 'Gerenciar Hábitos!' })); }
           }}
         />
