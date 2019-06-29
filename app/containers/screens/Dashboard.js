@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, Text, Alert } from 'react-native';
+import { StyleSheet, View, Text, Alert, Dimensions } from 'react-native';
 import { Card, CardItem, Body } from 'native-base';
 import { connect } from 'react-redux';
 import { FloatingAction } from "react-native-floating-action";
@@ -8,6 +8,10 @@ import Avatar from '../../components/common/avatar';
 import ProgressBar from '../../components/common/progressBar';
 import { openModal } from '../../actions/nav';
 import { loadGroups } from '../../actions/group';
+import DashFeed from '../../components/DashFeed';
+import { ScrollView } from 'react-native-gesture-handler';
+
+const height = Dimensions.get('window').height;
 
 class Dashboard extends React.Component {
 	componentDidMount() {
@@ -33,11 +37,6 @@ class Dashboard extends React.Component {
     );
   }
 
-  renderTableLine(d, idx) {
-    console.log("D = ",d);
-		return (<tr key={d.id}><View><Text>{d.name}</Text></View></tr>);
-	}
-
   render() {
     const { user, navigation, dispatch, groups } = this.props;
     const data = [];
@@ -47,50 +46,85 @@ class Dashboard extends React.Component {
       	data.push(groups[key]);
 			}
     }
-    // console.log("data = ", data);
+    console.log("data = ", data);
+
+    const dados = [
+      {
+        id: 100,
+        name: 'bom',
+        habits: [
+          '1',
+          '2',
+          '3',
+          '4',
+          '5',
+          '6',
+          '7',
+          '8',
+          '9'
+        ]
+      },
+      {
+        id: 200,
+        name: 'pessoal',
+        habits: [
+          '10',
+          '11',
+          '12'
+        ]
+      },
+      {
+        id: 300,
+        name: 'ruim',
+        habits: [
+          '13',
+          '14',
+          '15',
+          '16',
+          '17'
+        ]
+      }
+    ];
     
     return (
-      <View style={styles.container}>
-        <AppModals navigation={navigation} />
-        <Card style={styles.profileCard}>
-          <CardItem>
-            <Body>
-              <Avatar
-                size={90}
-                style={{ color: '#4D9BA3' }}
-                uploaded
-                uri={user.profilePic}
-                progress={100}
-                callback={() => { }}
-              />
-            </Body>
-            <Text style={{ alignSelf: 'flex-start', position: 'absolute', left: 110, top: 10, fontWeight: 'bold', fontSize: 18 }}>{user.name}</Text>
-            <View style={{ height: 66, justifyContent: "space-between" }}>
-              <ProgressBar width={150} color={"#98E1DF"} backgroundColor={"#EADEE0"} progress={50} title="Descrição"></ProgressBar>
-              <ProgressBar width={150} color={"#478FC8"} backgroundColor={"#EADEE0"} progress={80} title="Determinação"></ProgressBar>
-            </View>
-          </CardItem>
-        </Card>
-        <Card style={styles.areaCard}>
-          <CardItem>
-            <Body>
-              {console.log("Groups State = "+JSON.stringify(groups))}
-              {/* <Text> */}
-              {data.map((d, idx) => this.renderTableLine(d, idx))}
-              {/* </Text> */}
-            </Body>
-          </CardItem>
-        </Card>
-        <FloatingAction
-          actions={actions}
-          color='#50946F'
-          onPressItem={name => {
-            if (name === 'bt_logout') { this.logout() }
-            if (name === 'bt_my_habits') { dispatch(openModal('Groups', { title: 'Meus Hábitos! \n  \n \n \n \n \n', funcao: () => console.log('testando modal') })); }
-            if (name === 'bt_groups') { dispatch(openModal('Groups', { title: 'Grupos' })); }
-            if (name === 'bt_manage_habits') { dispatch(openModal('ManageGroups', { title: 'Gerenciar Hábitos!' })); }
-          }}
-        />
+      <View style={{ flex: 1 }}>
+        <ScrollView style={{ flex: 1, height, backgroundColor: '#AAD8DD' }}>
+          <View style={[styles.container]}>
+            <AppModals navigation={navigation} />
+            <Card style={styles.profileCard}>
+              <CardItem>
+                <Body>
+                  <Avatar
+                    size={90}
+                    style={{ color: '#4D9BA3' }}
+                    uploaded
+                    uri={user.profilePic}
+                    progress={100}
+                    callback={() => { }}
+                  />
+                </Body>
+                <Text style={{ alignSelf: 'flex-start', position: 'absolute', left: 110, top: 10, fontWeight: 'bold', fontSize: 18 }}>{user.name}</Text>
+                <View style={{ height: 66, justifyContent: "space-between" }}>
+                  <ProgressBar width={150} color={"#98E1DF"} backgroundColor={"#EADEE0"} progress={50} title="Descrição"></ProgressBar>
+                  <ProgressBar width={150} color={"#478FC8"} backgroundColor={"#EADEE0"} progress={80} title="Determinação"></ProgressBar>
+                </View>
+              </CardItem>
+            </Card>
+            <DashFeed data={dados} />
+          </View>
+        </ScrollView>
+        <View style={{ position: 'absolute', right: 0, bottom: 0 }}>
+          <FloatingAction
+            actions={actions}
+            color='#50946F'
+            onPressItem={name => {
+              if (name === 'bt_logout') { this.logout() }
+              if (name === 'bt_my_habits') { dispatch(openModal('Groups', { title: 'Meus Hábitos! \n  \n \n \n \n \n', funcao: () => console.log('testando modal') })); }
+              if (name === 'bt_groups') { dispatch(openModal('Groups', { title: 'Grupos' })); }
+              if (name === 'bt_manage_habits') { dispatch(openModal('ManageGroups', { title: 'Gerenciar Hábitos!' })); }
+            }}
+          />
+        </View>
       </View>
     );
   }
@@ -110,15 +144,6 @@ const styles = StyleSheet.create({
     borderTopEndRadius: 20,
     overflow: 'hidden',
     backgroundColor: '#4D9BA3'
-  },
-  areaCard: {
-    height: 500,
-    marginTop: 50,
-    width: 350,
-    borderRadius: 20,
-    borderTopEndRadius: 20,
-    overflow: 'hidden',
-    backgroundColor: '#fff'
   }
 });
 
