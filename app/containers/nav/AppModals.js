@@ -8,11 +8,13 @@ import { closeModal } from '../../actions/nav';
 import Example from '../popups/example';
 import Groups from '../popups/groups';
 import ManageGroups from '../popups/manageGroups'
+import NewGroup from '../popups/newGroup';
 
 const modalComponents = {
 	Example,
 	Groups,
-	ManageGroups
+	ManageGroups,
+	NewGroup
 };
 
 const modalComponentsIds = Object.keys(modalComponents);

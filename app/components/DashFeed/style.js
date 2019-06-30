@@ -15,11 +15,11 @@ export default StyleSheet.create({
 	},
 
 	habit: {
-		height: 50,
-		width: 50,
+		height: 60,
+		width: 60,
 		borderRadius: 10,
-		backgroundColor: 'red',
-		margin: 8
+		backgroundColor: '#4D9BA3',
+		margin: 8,
 	}
 
 });

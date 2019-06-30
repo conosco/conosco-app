@@ -46,45 +46,6 @@ class Dashboard extends React.Component {
       	data.push(groups[key]);
 			}
     }
-    console.log("data = ", data);
-
-    const dados = [
-      {
-        id: 100,
-        name: 'bom',
-        habits: [
-          '1',
-          '2',
-          '3',
-          '4',
-          '5',
-          '6',
-          '7',
-          '8',
-          '9'
-        ]
-      },
-      {
-        id: 200,
-        name: 'pessoal',
-        habits: [
-          '10',
-          '11',
-          '12'
-        ]
-      },
-      {
-        id: 300,
-        name: 'ruim',
-        habits: [
-          '13',
-          '14',
-          '15',
-          '16',
-          '17'
-        ]
-      }
-    ];
     
     return (
       <View style={{ flex: 1 }}>
@@ -119,9 +80,10 @@ class Dashboard extends React.Component {
             color='#50946F'
             onPressItem={name => {
               if (name === 'bt_logout') { this.logout() }
-              if (name === 'bt_my_habits') { dispatch(openModal('Groups', { title: 'Meus Hábitos! \n  \n \n \n \n \n', funcao: () => console.log('testando modal') })); }
+              if (name === 'bt_my_habits') { dispatch(openModal('Groups', { title: 'Meus Hábitos \n  \n \n \n \n \n', funcao: () => console.log('testando modal') })); }
               if (name === 'bt_groups') { dispatch(openModal('Groups', { title: 'Grupos' })); }
               if (name === 'bt_manage_habits') { dispatch(openModal('ManageGroups', { title: 'Gerenciar Hábitos!' })); }
+              if (name === 'bt_new_group') { dispatch(openModal('NewGroup', { title: 'Novo Grupo' })); }
             }}
           />
         </View>
@@ -160,19 +122,26 @@ const actions = [
     icon: require("../../../assets/icons/my-habits.png"),
     name: "bt_my_habits",
     color: '#50946F',
-    position: 3
+    position: 2
   },
   {
     text: "Gerenciar Hábitos",
     icon: require("../../../assets/icons/manage.png"),
     name: "bt_manage_habits",
     color: '#50946F',
-    position: 4
+    position: 3
   },
   {
     text: "Grupos",
     icon: require("../../../assets/icons/groups.png"),
     name: "bt_groups",
+    color: '#50946F',
+    position: 4
+  },
+  {
+    text: "Criar Grupo",
+    icon: require("../../../assets/icons/new-post.png"),
+    name: "bt_new_group",
     color: '#50946F',
     position: 5
   }
