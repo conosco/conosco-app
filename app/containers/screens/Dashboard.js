@@ -110,7 +110,7 @@ class Dashboard extends React.Component {
                 </View>
               </CardItem>
             </Card>
-            <DashFeed data={dados} />
+            <DashFeed data={data} />
           </View>
         </ScrollView>
         <View style={{ position: 'absolute', right: 0, bottom: 0 }}>

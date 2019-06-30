@@ -9,6 +9,7 @@ const keyExtractor = item => (item && item.id.toString()) || '';
 class DashFeed extends React.Component {
   
   renderHabit = habit => (
+    // console.log ("habit = ", habit),
     <View style={style.habit} key={habit}>
       <Text>{habit}</Text>
     </View>
@@ -25,7 +26,11 @@ class DashFeed extends React.Component {
         showsHorizontalScrollIndicator={false}
       >
         <View style={style.group}>
-          {item.habits.map(habit => this.renderHabit(habit))}
+          {console.log("item.habits = ", item.habits)}
+          {/* {Object.keys(item.habits).map(function(key, index) {
+            console.log("item.habits[key] = ", item.habits[key])})} */}
+          {Object.keys(item.habits).map(habit => this.renderHabit(habit))}
+          {/* {item.habits.map(habit => this.renderHabit(habit))} */}
         </View>
       </ScrollView>
     </View>
