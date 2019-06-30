@@ -42,7 +42,6 @@ const routes = {
   NewGroup: {
     screen: NewGroup,
     navigationOptions: {
-      header: null,
       headerStyle,
     }
   }
