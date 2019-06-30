@@ -53,8 +53,16 @@ class ButtonFactory {
                 textColor={'#fff'}
                 icon={null}
                 onPress={props.register}
-              />
-  
+            />
+            case 'create-group':
+              return <Button
+              styleProps={styles.buttonRegister}
+              text={'Criar Grupo'}
+              color={'#6DBCD6'}
+              textColor={'#fff'}
+              icon={null}
+              onPress={props.createGroup}
+            />
             default:
                 return undefined;
         }

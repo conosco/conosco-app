@@ -18,3 +18,20 @@ export const loadGroups = (token) => (dispatch) => {
       Alert('Ocorreu um erro ao carregar os grupos!');
     });
 };
+
+export const createGroup = (group, navigation) => () => {
+  const thenCallback = (result) => {
+    console.log("status = ", result.status)
+    if (result.status === 201) {
+      Alert.alert('Grupo criado com sucesso!');
+      navigation.navigate('Dashboard');
+    }
+    else {
+      alert('Não foi possível criar o grupo!');
+      console.log('create group error: ', error);
+    }
+  };
+
+  groupApi.createGroup(group)
+    .then(thenCallback)
+};

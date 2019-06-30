@@ -5,6 +5,7 @@ import Home from '../screens/Home';
 import Register from '../screens/Register';
 import Login from '../screens/Login';
 import Dashboard from '../screens/Dashboard';
+import NewGroup from '../screens/NewGroup';
 
 const headerStyle = {
   backgroundColor: '#4D9BA3',
@@ -38,6 +39,13 @@ const routes = {
       headerStyle,
     }
   },
+  NewGroup: {
+    screen: NewGroup,
+    navigationOptions: {
+      header: null,
+      headerStyle,
+    }
+  }
 };
 
 const Navigator = createAppContainer(createStackNavigator(routes));

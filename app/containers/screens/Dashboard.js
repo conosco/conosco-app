@@ -83,7 +83,7 @@ class Dashboard extends React.Component {
               if (name === 'bt_my_habits') { dispatch(openModal('Groups', { title: 'Meus Hábitos \n  \n \n \n \n \n', funcao: () => console.log('testando modal') })); }
               if (name === 'bt_groups') { dispatch(openModal('Groups', { title: 'Grupos' })); }
               if (name === 'bt_manage_habits') { dispatch(openModal('ManageGroups', { title: 'Gerenciar Hábitos!' })); }
-              if (name === 'bt_new_group') { dispatch(openModal('NewGroup', { title: 'Novo Grupo' })); }
+              if (name === 'bt_new_group') { this.props.navigation.navigate('NewGroup') }
             }}
           />
         </View>

@@ -11,7 +11,7 @@ class NewGroup extends React.Component {
 	};
 
 	render() {
-		const { modal } = this.props;
+        const { modal } = this.props;
 		return (
       <NewGroupPopup
         onOkPress={this.closeModal}

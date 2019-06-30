@@ -15,7 +15,7 @@ const NewGroupPopup = ({ title, onOkPress }) => (
 			<Text style={style.body}>{title}</Text>
 			<Text>Nome</Text>
 			<TouchableOpacity onPress={onOkPress} style={style.button}>
-				<Text style={style.textButton}>{'Criar Grupo'}</Text>
+				<Text style={style.textButton}>{'Fechar'}</Text>
 			</TouchableOpacity>
 		</View>
 	</Popup>
