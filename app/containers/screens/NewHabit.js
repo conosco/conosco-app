@@ -95,8 +95,5 @@ const styles = StyleSheet.create({
     }
 });
 
-const mapStateToProps = ({ user }) => ({
-    user,
-});
 
-export default connect(mapStateToProps)(NewHabit);
+export default connect()(NewHabit);

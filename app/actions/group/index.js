@@ -6,10 +6,8 @@ import groupApi from '../../api/groupApi';
 export const loadGroups = (token) => (dispatch) => {
   groupApi.getGroups(token)
     .then((result) => {
-      console.log("result = ", result.status);
       if (result.status === 200) {
         const groups = result.data;
-        console.log("groups = ", groups);
         dispatch(GroupAC.fetchGroups(groups));
       }
     })
@@ -21,7 +19,6 @@ export const loadGroups = (token) => (dispatch) => {
 
 export const createGroup = (group, navigation) => () => {
   const thenCallback = (result) => {
-    console.log("status = ", result.status)
     if (result.status === 201) {
       Alert.alert('Grupo criado com sucesso!');
       navigation.navigate('Dashboard');

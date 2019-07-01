@@ -10,7 +10,7 @@ class DashFeed extends React.Component {
   
   renderHabit = habit => (
     <View style={style.habit} key={habit}>
-      <Text style={{textAlign: 'center', paddingTop: 10}}>{habit.name}</Text>
+      <Text style={{textAlign: 'center', paddingTop: 10}} onPress={() => console.log(habit)}>{habit.name}</Text>
     </View>
   );
 

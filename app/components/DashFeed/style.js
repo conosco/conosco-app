@@ -7,7 +7,8 @@ export default StyleSheet.create({
 	content: {
 		width: width - 32,
 		backgroundColor: '#fff',
-		borderRadius: 10
+		borderRadius: 10,
+		margin: 20
 	},
 
 	group: {

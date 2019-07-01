@@ -6,10 +6,8 @@ import habitApi from '../../api/habitApi';
 export const loadHabits = (token) => (dispatch) => {
   habitApi.getHabits(token)
     .then((result) => {
-      console.log("result = ", result.status);
       if (result.status === 200) {
         const habits = result.data;
-        console.log("habits = ", habits);
         dispatch(HabitAC.fetchHabits(habits));
       }
     })
@@ -21,7 +19,6 @@ export const loadHabits = (token) => (dispatch) => {
 
 export const createHabit = (habit, navigation) => () => {
   const thenCallback = (result) => {
-    console.log("status = ", result.status)
     if (result.status === 201) {
       Alert.alert('Habito criado com sucesso!');
       navigation.navigate('Dashboard');

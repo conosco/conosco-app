@@ -118,7 +118,7 @@ const actions = [
     position: 1
   },
   {
-    text: "Hábitos",
+    text: "Adicionar Hábitos a Grupos",
     icon: require("../../../assets/icons/my-habits.png"),
     name: "bt_my_habits",
     color: '#50946F',
