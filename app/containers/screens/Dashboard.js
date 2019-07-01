@@ -82,7 +82,7 @@ class Dashboard extends React.Component {
               if (name === 'bt_logout') { this.logout() }
               if (name === 'bt_my_habits') { dispatch(openModal('Groups', { title: 'Meus Hábitos \n  \n \n \n \n \n', funcao: () => console.log('testando modal') })); }
               if (name === 'bt_groups') { dispatch(openModal('Groups', { title: 'Grupos' })); }
-              if (name === 'bt_manage_habits') { dispatch(openModal('ManageGroups', { title: 'Gerenciar Hábitos!' })); }
+              if (name === 'bt_manage_habits') { this.props.navigation.navigate('NewHabit') }
               if (name === 'bt_new_group') { this.props.navigation.navigate('NewGroup') }
             }}
           />
@@ -118,14 +118,14 @@ const actions = [
     position: 1
   },
   {
-    text: "Meus Hábitos",
+    text: "Hábitos",
     icon: require("../../../assets/icons/my-habits.png"),
     name: "bt_my_habits",
     color: '#50946F',
     position: 2
   },
   {
-    text: "Gerenciar Hábitos",
+    text: "Criar Hábitos",
     icon: require("../../../assets/icons/manage.png"),
     name: "bt_manage_habits",
     color: '#50946F',

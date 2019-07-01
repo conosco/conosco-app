@@ -18,11 +18,11 @@ import { createGroup } from '../../actions/group';
 
 var screenWidth = Dimensions.get('window').width;
 
-class NewGroup extends React.Component {
+class NewHabit extends React.Component {
 
     static navigationOptions = ({ navigation }) => {
         return {
-            headerTitle: <HeaderTitle title={'Crie o seu Grupo'} />,
+            headerTitle: <HeaderTitle title={'Crie um Hábito'} />,
             headerLeft: <HeaderBackButton tintColor={'#fff'} onPress={() => navigation.goBack()} />,
         };
     }
@@ -50,10 +50,10 @@ class NewGroup extends React.Component {
                     <Image
                         style={{
                             top: -90,
-                            width: screenWidth * 0.4,
-                            height: screenWidth * 0.4,
+                            width: screenWidth * 0.5,
+                            height: screenWidth * 0.5,
                         }}
-                        source={require('../../../assets/img/conosco_logo(sem_fundo).png')}
+                        source={require('../../../assets/img/conosco_logo_montanha.png')}
                     />
                     <Input
                         onChange={(name) => this.setState({ name })}
@@ -71,7 +71,7 @@ class NewGroup extends React.Component {
                     <Input
                         onChange={(iconUrl) => this.setState({ iconUrl })}
                         value={this.state.iconUrl}
-                        placeholder={'URL da Imagem do Grupo'}
+                        placeholder={'URL da Imagem do Hábito'}
                         autoCorrect={false}
                     />
                     {ButtonFactory.factoryMethod('create-group', { ...this.props, createGroup: this.createGroup })}
@@ -99,4 +99,4 @@ const mapStateToProps = ({ user }) => ({
     user,
 });
 
-export default connect(mapStateToProps)(NewGroup);
+export default connect(mapStateToProps)(NewHabit);
