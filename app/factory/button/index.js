@@ -63,6 +63,15 @@ class ButtonFactory {
               icon={null}
               onPress={props.createGroup}
             />
+            case 'create-habit':
+              return <Button
+              styleProps={styles.buttonRegister}
+              text={'Criar Hábito'}
+              color={'#6DBCD6'}
+              textColor={'#fff'}
+              icon={null}
+              onPress={props.createHabit}
+            />
             default:
                 return undefined;
         }

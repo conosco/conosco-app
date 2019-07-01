@@ -14,7 +14,7 @@ import Input from '../../components/common/input';
 import ButtonFactory from '../../factory/button/index';
 import HeaderTitle from '../../components/common/Header/headerTitle';
 import HeaderBackButton from '../../components/common/Header/headerBackButton';
-import { createGroup } from '../../actions/group';
+import { createHabit } from '../../actions/habit';
 
 var screenWidth = Dimensions.get('window').width;
 
@@ -36,11 +36,11 @@ class NewHabit extends React.Component {
         };
     }
 
-    createGroup = () => {
+    createHabit = () => {
         const { dispatch, navigation } = this.props;
         const { name, description, iconUrl } = this.state;
-        const group = { name, description, iconUrl };
-        dispatch(createGroup(group, navigation));
+        const habit = { name, description, iconUrl };
+        dispatch(createHabit(habit, navigation));
     }
 
     render() {
@@ -74,7 +74,7 @@ class NewHabit extends React.Component {
                         placeholder={'URL da Imagem do Hábito'}
                         autoCorrect={false}
                     />
-                    {ButtonFactory.factoryMethod('create-group', { ...this.props, createGroup: this.createGroup })}
+                    {ButtonFactory.factoryMethod('create-habit', { ...this.props, createHabit: this.createHabit })}
                     <KeyboardSpacer />
                 </View>
             </TouchableWithoutFeedback>
