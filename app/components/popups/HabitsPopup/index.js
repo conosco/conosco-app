@@ -9,10 +9,11 @@ import PropTypes from 'prop-types';
 import Popup from '../../common/Popup';
 import style from './style';
 
-const HabitsPopup = ({ title, onOkPress, funcao }) => (
+const HabitsPopup = ({ name, description, onOkPress }) => (
 	<Popup>
 		<View style={style.content}>
-			<Text style={style.body}>{title}</Text>
+			<Text style={style.body}>{name}</Text>
+			<Text style={style.description}>{description}</Text>
 			<TouchableOpacity onPress={onOkPress} style={style.button}>
 				<Text style={style.textButton}>{'Ok'}</Text>
 			</TouchableOpacity>
@@ -21,9 +22,9 @@ const HabitsPopup = ({ title, onOkPress, funcao }) => (
 );
 
 HabitsPopup.propTypes = {
-  title: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
   onOkPress: PropTypes.func.isRequired,
-  funcao: PropTypes.func.isRequired
 };
 
 export default HabitsPopup;

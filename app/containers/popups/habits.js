@@ -15,8 +15,8 @@ class Habits extends React.Component {
 		return (
       <HabitsPopup
         onOkPress={this.closeModal}
-		title={modal.params.title}
-		funcao={modal.params.funcao}
+		name={modal.params.name}
+		description={modal.params.description}
       />
 		);
 	}
@@ -25,8 +25,8 @@ class Habits extends React.Component {
 Habits.propTypes = {
 	modal: PropTypes.shape({
 		params: PropTypes.shape({
-			title: PropTypes.string.isRequired,
-			funcao: PropTypes.func.isRequired
+			name: PropTypes.string.isRequired,
+			description: PropTypes.string.isRequired
 		}).isRequired,
 		close: PropTypes.func.isRequired
 	}).isRequired

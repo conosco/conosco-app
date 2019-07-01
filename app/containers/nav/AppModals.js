@@ -9,12 +9,14 @@ import Example from '../popups/example';
 import Groups from '../popups/groups';
 import ManageGroups from '../popups/manageGroups'
 import NewGroup from '../popups/newGroup';
+import Habits from '../popups/habits';
 
 const modalComponents = {
 	Example,
 	Groups,
 	ManageGroups,
-	NewGroup
+	NewGroup,
+	Habits
 };
 
 const modalComponentsIds = Object.keys(modalComponents);

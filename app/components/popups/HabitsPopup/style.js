@@ -14,6 +14,13 @@ export default StyleSheet.create({
 		color: 'red'
 	},
 
+	description: {
+		fontSize: 14,
+		lineHeight: 20,
+		color: 'black',
+		marginTop: 10
+	},
+
 	button: {
 		marginTop: 16,
 		borderRadius: 18,

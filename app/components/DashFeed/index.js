@@ -1,6 +1,8 @@
 import React from 'react';
 import { ScrollView, FlatList, View, Text, Modal, TouchableHighlight } from 'react-native';
 import PropTypes from 'prop-types';
+import { openModal } from '../../actions/nav';
+import { connect } from 'react-redux';
 
 import style from './style';
 
@@ -8,47 +10,15 @@ const keyExtractor = item => (item && item.id.toString()) || '';
 
 class DashFeed extends React.Component {
 
-  state = {
-    modalVisible: false,
-    name: '',
-    description: ''
-  };
-
-  setModalVisible(visible, habit) {
-    this.setState({ modalVisible: visible, name: habit.name, description: habit.description });
-    this.renderModal(habit);
-    console.log(this.state)
+  setModalVisible(habit) {
+    const { dispatch } = this.props;
+    dispatch(openModal('Habits', { name: habit.name, description: habit.description  }));
   }
-
-  renderModal = habit => (
-    <View style={{ width: '100%', alignItems: 'center' }}>
-    <Modal
-    animationType="slide"
-    transparent={false}
-    visible={this.state.modalVisible}
-    onRequestClose={() => {
-      Alert.alert('Modal has been closed.');
-    }}
-    style={{ height: 50 }}>
-    <View style={{ marginTop: 22 }}>
-      <View>
-        <Text>{habit.name}</Text>
-        <TouchableHighlight
-          onPress={() => {
-            this.setModalVisible(!this.state.modalVisible, habit);
-          }}>
-          <Text>Fechar Modal</Text>
-        </TouchableHighlight>
-      </View>
-    </View>
-  </Modal>
-  </View>
-  );
 
   renderHabit = habit => (
     <View style={style.habit} key={habit}>
       <Text style={{ textAlign: 'center', paddingTop: 10 }} onPress={() => {
-        this.setModalVisible(!this.state.modalVisible, habit)
+        this.setModalVisible(habit)
       }}>{habit.name}</Text>
     </View>
   );
@@ -92,4 +62,4 @@ DashFeed.defaultProps = {
   data: []
 };
 
-export default DashFeed;
+export default connect()(DashFeed);

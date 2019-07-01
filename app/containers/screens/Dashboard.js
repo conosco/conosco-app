@@ -80,7 +80,7 @@ class Dashboard extends React.Component {
             color='#50946F'
             onPressItem={name => {
               if (name === 'bt_logout') { this.logout() }
-              if (name === 'bt_my_habits') { dispatch(openModal('Groups', { title: 'Meus Hábitos \n  \n \n \n \n \n', funcao: () => console.log('testando modal') })); }
+              if (name === 'bt_my_habits') { dispatch(openModal('Groups', { title: 'Meus Hábitos \n  \n \n \n \n \n' })); }
               if (name === 'bt_groups') { dispatch(openModal('Groups', { title: 'Grupos' })); }
               if (name === 'bt_manage_habits') { this.props.navigation.navigate('NewHabit') }
               if (name === 'bt_new_group') { this.props.navigation.navigate('NewGroup') }
