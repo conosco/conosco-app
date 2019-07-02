@@ -70,7 +70,6 @@ class Register extends React.Component {
     const { email, password, firstName, lastName } = this.state.user;
     const { profilePic } = this.state.storage;
     const user = { email, password, firstName, lastName, profilePic };
-    console.log(user)
     if (validateRegister(user)) dispatch(register(user, navigation));
   }
 
